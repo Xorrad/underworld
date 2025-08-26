@@ -1,8 +1,22 @@
 #include "Game.hpp"
-#include "tuim/tuim.hpp"
+#include "game/states/MainMenuState.hpp"
 
-Game::Game() {
+Game::Game() :
+    m_Args(std::vector<const char*>{}),
+    m_GameState(MakeUnique<MainMenuState>(this)),
+    m_IsRunning(true)
+{}
 
+bool Game::IsRunning() const {
+    return m_IsRunning;
+}
+
+void Game::SetRunning(bool running) {
+    m_IsRunning = running;
+}
+
+void Game::SetGameState(UniquePtr<GameState> gameState) {
+    m_GameState = std::move(gameState);
 }
 
 void Game::Init(int argc, char* argv[]) {
@@ -19,17 +33,9 @@ void Game::Init(int argc, char* argv[]) {
 }
 
 void Game::Run() {
-    char32_t keyCode = 0;
-    while (keyCode != tuim::Key::F1) {
-        keyCode = tuim::PollKeyCode();
-        tuim::Update(keyCode);
-        tuim::Clear();
-
-        tuim::Print("main\n");
-        time_t timestamp = time(0);
-        tuim::Print("{}", timestamp);
-
-        tuim::Display();
+    while (m_IsRunning) {
+        m_GameState->Update();
+        m_GameState->Render();
     }
 }
 

@@ -2,19 +2,14 @@
 #include <memory> // std::unique_ptr, std::shared_ptr...
 #include <vector> // std::vector
 #include <string> // std::string
+#include <tuim/tuim.hpp>
 
 #include "util/SignalHandler.hpp"
 const SignalHandler SIGNAL_HANDLER;
 
 class Game;
-
-namespace Core {
-    
-}
-
-namespace State {
-    class GameState;
-}
+class GameState;
+class MainMenuState;
 
 namespace UI {
     class UI;
@@ -22,5 +17,3 @@ namespace UI {
 }
 
 #include "util/Ptr.hpp"
-
-#include "game/Game.hpp"
