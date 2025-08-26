@@ -6,7 +6,7 @@
 MAKEFLAGS += -j4
 
 # Compiler flags
-CXX      := g++
+CXX      := g++-13
 CXXFLAGS := -std=c++20 -pedantic-errors -Wall -Wno-format-security -Wno-sign-compare -Wno-unused-but-set-variable
 
 # Build type (default, debug, release)
