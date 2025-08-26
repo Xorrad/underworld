@@ -26,7 +26,8 @@ void Game::Run() {
         tuim::Clear();
 
         tuim::Print("main\n");
-        tuim::Print("{}", time(0));
+        time_t timestamp = time(0);
+        tuim::Print("{}", timestamp);
 
         tuim::Display();
     }
