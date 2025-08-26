@@ -8,7 +8,7 @@ public:
 
     bool IsRunning() const;
 
-    void SetGameState(UniquePtr<State> gameState);
+    void SetState(UniquePtr<State> state);
     void SetRunning(bool running);
 
     void Init(int argc, char* argv[]);
@@ -17,6 +17,6 @@ public:
 
 private:
     std::vector<const char*> m_Args;
-    UniquePtr<State> m_GameState;
+    UniquePtr<State> m_State;
     bool m_IsRunning;
 };

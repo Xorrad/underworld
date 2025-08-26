@@ -3,7 +3,7 @@
 
 Game::Game() :
     m_Args(std::vector<const char*>{}),
-    m_GameState(MakeUnique<HomeState>(this)),
+    m_State(MakeUnique<HomeState>(this)),
     m_IsRunning(true)
 {}
 
@@ -15,8 +15,8 @@ void Game::SetRunning(bool running) {
     m_IsRunning = running;
 }
 
-void Game::SetGameState(UniquePtr<State> gameState) {
-    m_GameState = std::move(gameState);
+void Game::SetState(UniquePtr<State> state) {
+    m_State = std::move(state);
 }
 
 void Game::Init(int argc, char* argv[]) {
@@ -34,8 +34,8 @@ void Game::Init(int argc, char* argv[]) {
 
 void Game::Run() {
     while (m_IsRunning) {
-        m_GameState->Update();
-        m_GameState->Render();
+        m_State->Update();
+        m_State->Render();
     }
 }
 
