@@ -2,6 +2,7 @@
 #include <memory> // std::unique_ptr, std::shared_ptr...
 #include <vector> // std::vector
 #include <string> // std::string
+#include <stack> // std::stack
 #include <tuim/tuim.hpp>
 
 #include "util/SignalHandler.hpp"

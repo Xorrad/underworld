@@ -5,9 +5,4 @@
 class HomeState : public State {
 public:
     HomeState(Game* game);
-
-    void Update() override;
-    void Render() override;
-
-private:
 };
