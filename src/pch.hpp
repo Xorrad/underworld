@@ -8,12 +8,13 @@
 const SignalHandler SIGNAL_HANDLER;
 
 class Game;
-class GameState;
-class MainMenuState;
+class State;
+class HomeState;
 
 namespace UI {
     class UI;
     class Menu;
+    class HomeMenu;
 }
 
 #include "util/Ptr.hpp"

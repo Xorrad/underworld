@@ -1,9 +1,9 @@
 #include "Game.hpp"
-#include "game/states/MainMenuState.hpp"
+#include "game/states/HomeState.hpp"
 
 Game::Game() :
     m_Args(std::vector<const char*>{}),
-    m_GameState(MakeUnique<MainMenuState>(this)),
+    m_GameState(MakeUnique<HomeState>(this)),
     m_IsRunning(true)
 {}
 
@@ -15,7 +15,7 @@ void Game::SetRunning(bool running) {
     m_IsRunning = running;
 }
 
-void Game::SetGameState(UniquePtr<GameState> gameState) {
+void Game::SetGameState(UniquePtr<State> gameState) {
     m_GameState = std::move(gameState);
 }
 

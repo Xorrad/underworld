@@ -1,9 +1,9 @@
 #pragma once
 
-class GameState {
+class State {
 public:
-    GameState(Game* game) : m_Game(game) {}
-    virtual ~GameState() {}
+    State(Game* game) : m_Game(game) {}
+    virtual ~State() {}
 
     virtual void Update() = 0;
     virtual void Render() = 0;
