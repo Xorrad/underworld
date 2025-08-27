@@ -30,6 +30,8 @@ void Game::Init(int argc, char* argv[]) {
     tuim::CreateContext(argc, argv);
     tuim::SetTitle("Underworld: Organized Crime");
     tuim::SetFramerate(1.f);
+
+    Configuration::Initialize();
 }
 
 void Game::Run() {
@@ -40,6 +42,8 @@ void Game::Run() {
 }
 
 void Game::Exit() {
+    Configuration::Save();
+
     // Deinitialize tuim.
     tuim::DeleteContext();
 }

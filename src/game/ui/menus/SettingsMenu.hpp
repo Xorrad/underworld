@@ -4,9 +4,9 @@
 
 namespace UI {
 
-class HomeMenu : public Menu {
+class SettingsMenu : public Menu {
 public:
-    HomeMenu(Game* game, State* state);
+    SettingsMenu(Game* game, State* state);
 
     void Update(bool skipInput = false) override;
     void Render() override;

@@ -11,11 +11,12 @@ const SignalHandler SIGNAL_HANDLER;
 class Game;
 class State;
 class HomeState;
+class Configuration;
 
 namespace UI {
-    class UI;
     class Menu;
-    class HomeMenu;
+    class SettingsMenu;
 }
 
 #include "util/Ptr.hpp"
+#include "game/core/Configuration.hpp"

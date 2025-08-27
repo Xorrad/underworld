@@ -14,4 +14,5 @@ public:
 protected:
     Game* m_Game;
     std::stack<UniquePtr<UI::Menu>> m_Menus;
+    bool m_FirstFrame;
 };
