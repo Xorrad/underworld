@@ -1,0 +1,71 @@
+[
+    {
+        "id": "mexico",
+        "name": "México",
+        "capital": "ciudad_de_mexico",
+        "states": [
+            "baja_carlifornia",
+            "baja_california_sur",
+            "sonora",
+            "chihuahua",
+            "coahuila",
+            "nuevo_leon",
+            "tamaulipas",
+            "sinaloa",
+            "durango",
+            "zacatecas",
+            "san_luis_potosi",
+            "nayarit",
+            "jalisco",
+            "aguascalientes",
+            "guanajuato",
+            "queretaro",
+            "hidalgo",
+            "veracruz",
+            "colima",
+            "michoacan",
+            "mexico",
+            "ciudad_de_mexico",
+            "tlaxcala",
+            "morelos",
+            "puebla",
+            "guerrero",
+            "oaxaca",
+            "chiapas",
+            "tabasco",
+            "campeche",
+            "yucatan",
+            "quintana_roo"
+        ]
+    },
+    {
+        "id": "usa",
+        "name": "United States of America",
+        "capital": "washington_dc",
+        "states": [ "usa_state" ]
+    },
+    {
+        "id": "guatemala",
+        "name": "Guatemala",
+        "capital": "guatemala_city",
+        "states": [ "guatemala_state" ]
+    },
+    {
+        "id": "belize",
+        "name": "Belize",
+        "capital": "belmopan",
+        "states": [ "belize_state" ]
+    },
+    {
+        "id": "el_salvador",
+        "name": "El Salvador",
+        "capital": "san_salvador",
+        "states": [ "el_salvador_state" ]
+    },
+    {
+        "id": "honduras",
+        "name": "Honduras",
+        "capital": "tegucigalpa",
+        "states": [ "honduras_state" ]
+    }
+]

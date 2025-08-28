@@ -1,0 +1,268 @@
+[
+    {
+        "id": "baja_carlifornia",
+        "name": "Baja California",
+        "color": "#a9a9a9",
+        "capital": "mexicali",
+        "fertilities": []
+    },
+    {
+        "id": "baja_california_sur",
+        "name": "Baja California Sur",
+        "color": "#556b2f",
+        "capital": "la_paz",
+        "fertilities": []
+    },
+    {
+        "id": "sonora",
+        "name": "Sonora",
+        "color": "#2f4f4f",
+        "capital": "hermosillo",
+        "fertilities": []
+    },
+    {
+        "id": "chihuahua",
+        "name": "Chihuahua",
+        "color": "#228b22",
+        "capital": "chihuahua",
+        "fertilities": []
+    },
+    {
+        "id": "coahuila",
+        "name": "Coahuila",
+        "color": "#483d8b",
+        "capital": "saltillo",
+        "fertilities": []
+    },
+    {
+        "id": "nuevo_leon",
+        "name": "Nuevo León",
+        "color": "#008b8b",
+        "capital": "monterrey",
+        "fertilities": []
+    },
+    {
+        "id": "tamaulipas",
+        "name": "Tamaulipas",
+        "color": "#4682b4",
+        "capital": "ciudad_victoria",
+        "fertilities": []
+    },
+    {
+        "id": "sinaloa",
+        "name": "Sinaloa",
+        "color": "#8b0000",
+        "capital": "culiacan_rosales",
+        "fertilities": []
+    },
+    {
+        "id": "durango",
+        "name": "Durango",
+        "color": "#808000",
+        "capital": "victoria_de_durango",
+        "fertilities": []
+    },
+    {
+        "id": "zacatecas",
+        "name": "Zacatecas",
+        "color": "#000080",
+        "capital": "zacatecas",
+        "fertilities": []
+    },
+    {
+        "id": "san_luis_potosi",
+        "name": "San Luis Potosí",
+        "color": "#d2691e",
+        "capital": "san_luis_potosi",
+        "fertilities": []
+    },
+    {
+        "id": "nayarit",
+        "name": "Nayarit",
+        "color": "#ffa500",
+        "capital": "tepic",
+        "fertilities": []
+    },
+    {
+        "id": "jalisco",
+        "name": "Jalisco",
+        "color": "#b03060",
+        "capital": "guadalajara",
+        "fertilities": []
+    },
+    {
+        "id": "aguascalientes",
+        "name": "Aguascalientes",
+        "color": "#800080",
+        "capital": "aguascalientes",
+        "fertilities": []
+    },
+    {
+        "id": "guanajuato",
+        "name": "Guanajuato",
+        "color": "#ff0000",
+        "capital": "guanajuato",
+        "fertilities": []
+    },
+    {
+        "id": "queretaro",
+        "name": "Querétaro",
+        "color": "#ffd700",
+        "capital": "santiago_de_queretaro",
+        "fertilities": []
+    },
+    {
+        "id": "hidalgo",
+        "name": "Hidalgo",
+        "color": "#00ff00",
+        "capital": "pachuca_de_soto",
+        "fertilities": []
+    },
+    {
+        "id": "veracruz",
+        "name": "Veracruz",
+        "color": "#8fbc8f",
+        "capital": "xalapa_enriquez",
+        "fertilities": []
+    },
+    {
+        "id": "colima",
+        "name": "Colima",
+        "color": "#dc143c",
+        "capital": "colima",
+        "fertilities": []
+    },
+    {
+        "id": "michoacan",
+        "name": "Michoacán",
+        "color": "#00ff7f",
+        "capital": "morelia",
+        "fertilities": []
+    },
+    {
+        "id": "mexico",
+        "name": "México",
+        "color": "#0000ff",
+        "capital": "toluca_de_lerdo",
+        "fertilities": []
+    },
+    {
+        "id": "ciudad_de_mexico",
+        "name": "Ciudad de México",
+        "color": "#0000ff",
+        "capital": "ciudad_de_mexico",
+        "fertilities": []
+    },
+    {
+        "id": "tlaxcala",
+        "name": "Tlaxcala",
+        "color": "#1e90ff",
+        "capital": "tlaxcala_de_xicohtencatl",
+        "fertilities": []
+    },
+    {
+        "id": "morelos",
+        "name": "Morelos",
+        "color": "#adff2f",
+        "capital": "cuernavaca",
+        "fertilities": []
+    },
+    {
+        "id": "puebla",
+        "name": "Puebla",
+        "color": "#ff00ff",
+        "capital": "puebla_de_zaragoza",
+        "fertilities": []
+    },
+    {
+        "id": "guerrero",
+        "name": "Guerrero",
+        "color": "#00ffff",
+        "capital": "chilpancingo_de_los_bravo",
+        "fertilities": []
+    },
+    {
+        "id": "oaxaca",
+        "name": "Oaxaca",
+        "color": "#f0e68c",
+        "capital": "oaxaca_de_juarez",
+        "fertilities": []
+    },
+    {
+        "id": "chiapas",
+        "name": "Chiapas",
+        "color": "#ff1493",
+        "capital": "tuxtla_gutierrez",
+        "fertilities": []
+    },
+    {
+        "id": "tabasco",
+        "name": "Tabasco",
+        "color": "#90ee90",
+        "capital": "villahermosa",
+        "fertilities": []
+    },
+    {
+        "id": "campeche",
+        "name": "Campeche",
+        "color": "#7b68ee",
+        "capital": "san_francisco_de_campeche",
+        "fertilities": []
+    },
+    {
+        "id": "yucatan",
+        "name": "Yucatán",
+        "color": "#ffa07a",
+        "capital": "merida",
+        "fertilities": []
+    },
+    {
+        "id": "quintana_roo",
+        "name": "Quintana Roo",
+        "color": "#434d4d",
+        "capital": "chetumal",
+        "fertilities": []
+    },
+    {
+        "id": "usa_state",
+        "name": "United States of America",
+        "color": "#ee82ee",
+        "capital": "washington_dc",
+        "fertilities": []
+    },
+    {
+        "id": "guatemala_state",
+        "name": "Guatemala",
+        "color": "#ffe4c4",
+        "capital": "guatemala_city",
+        "fertilities": []
+    },
+    {
+        "id": "belize_state",
+        "name": "Belize",
+        "color": "#4a8787",
+        "capital": "belmopan",
+        "fertilities": []
+    },
+    {
+        "id": "el_salvador_state",
+        "name": "El Salvador",
+        "color": "#781c1c",
+        "capital": "san_salvador",
+        "fertilities": []
+    },
+    {
+        "id": "honduras_state",
+        "name": "Honduras",
+        "color": "#ffb6c1",
+        "capital": "tegucigalpa",
+        "fertilities": []
+    },
+    {
+        "id": "ocean",
+        "name": "Ocean",
+        "color": "#c6ecff",
+        "capital": "",
+        "fertilities": []
+    }
+]
