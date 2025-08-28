@@ -2,8 +2,8 @@
 #include "game/Game.hpp"
 #include "game/ui/components/Components.hpp"
 
-#include "game/ui/menus/SettingsMenu.hpp"
-#include "game/ui/menus/NewGameMenu.hpp"
+#include "game/ui/menus/home/SettingsMenu.hpp"
+#include "game/ui/menus/home/NewGameMenu.hpp"
 
 UI::HomeMenu::HomeMenu(Game* game, State* state) : Menu(game, state) {}
 

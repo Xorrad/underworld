@@ -26,12 +26,20 @@ void Game::Init(int argc, char* argv[]) {
     for (int i = 0; i < argc; i++)
         m_Args.push_back(argv[i]);
 
+    Configuration::Initialize();
+
     // Initialize tuim.
     tuim::CreateContext(argc, argv);
     tuim::SetTitle("Underworld: Organized Crime");
     tuim::SetFramerate(1.f);
-
-    Configuration::Initialize();
+    tuim::DefineStyle('b', tuim::Style::BOLD);
+    tuim::DefineStyle('d', tuim::Style::FAINT);
+    tuim::DefineStyle('i', tuim::Style::ITALIC);
+    tuim::DefineStyle('u', tuim::Style::UNDERLINE);
+    tuim::DefineStyle('g', tuim::Style::BLINKING);
+    tuim::DefineStyle('n', tuim::Style::REVERSE);
+    tuim::DefineStyle('h', tuim::Style::HIDDEN);
+    tuim::DefineStyle('s', tuim::Style::STRIKETHROUGH);
 }
 
 void Game::Run() {

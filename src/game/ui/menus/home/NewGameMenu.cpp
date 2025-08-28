@@ -1,6 +1,7 @@
 #include "NewGameMenu.hpp"
 #include "game/Game.hpp"
 #include "game/states/State.hpp"
+#include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
 
 #include <fmt/format.h>
@@ -30,7 +31,7 @@ void UI::NewGameMenu::Render() {
     tuim::Print("\n\n\t");
     
     if (tuim::Button("#button-start", "Start"))
-        m_State->PopMenu();
+        m_Game->SetState(MakeUnique<InGameState>(m_Game));
     tuim::Print("\n\t");
 
     if (tuim::Button("#button-back", "Back"))
