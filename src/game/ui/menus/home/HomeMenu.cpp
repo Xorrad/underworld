@@ -5,7 +5,7 @@
 #include "game/ui/menus/home/SettingsMenu.hpp"
 #include "game/ui/menus/home/NewGameMenu.hpp"
 
-UI::HomeMenu::HomeMenu(Game* game, State* state) : Menu(game, state) {}
+UI::HomeMenu::HomeMenu(Game* game, IState* state) : IMenu(game, state) {}
 
 void UI::HomeMenu::Update(bool skipInput) {
     tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));

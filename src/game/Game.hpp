@@ -1,6 +1,6 @@
 #pragma once
 
-#include "game/states/State.hpp"
+#include "game/states/IState.hpp"
 
 class Game {
 public:
@@ -8,7 +8,7 @@ public:
 
     bool IsRunning() const;
 
-    void SetState(UniquePtr<State> state);
+    void SetState(UniquePtr<IState> state);
     void SetRunning(bool running);
 
     void Init(int argc, char* argv[]);
@@ -17,6 +17,6 @@ public:
 
 private:
     std::vector<const char*> m_Args;
-    UniquePtr<State> m_State;
+    UniquePtr<IState> m_State;
     bool m_IsRunning;
 };

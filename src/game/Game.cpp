@@ -15,7 +15,7 @@ void Game::SetRunning(bool running) {
     m_IsRunning = running;
 }
 
-void Game::SetState(UniquePtr<State> state) {
+void Game::SetState(UniquePtr<IState> state) {
     m_State = std::move(state);
 }
 

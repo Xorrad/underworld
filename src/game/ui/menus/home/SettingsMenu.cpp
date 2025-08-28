@@ -1,9 +1,9 @@
 #include "SettingsMenu.hpp"
 #include "game/Game.hpp"
-#include "game/states/State.hpp"
+#include "game/states/IState.hpp"
 #include "game/ui/components/Components.hpp"
 
-UI::SettingsMenu::SettingsMenu(Game* game, State* state) : Menu(game, state) {}
+UI::SettingsMenu::SettingsMenu(Game* game, IState* state) : IMenu(game, state) {}
 
 void UI::SettingsMenu::Update(bool skipInput) {
     tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));

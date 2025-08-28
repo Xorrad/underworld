@@ -4,7 +4,7 @@
 
 #include "game/states/HomeState.hpp"
 
-UI::OverviewMenu::OverviewMenu(Game* game, State* state) : Menu(game, state) {}
+UI::OverviewMenu::OverviewMenu(Game* game, IState* state) : IMenu(game, state) {}
 
 void UI::OverviewMenu::Update(bool skipInput) {
     tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));

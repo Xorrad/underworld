@@ -1,12 +1,12 @@
 #pragma once
 
-#include "game/ui/menus/Menu.hpp"
+#include "game/ui/menus/IMenu.hpp"
 
 namespace UI {
 
-class OverviewMenu : public Menu {
+class OverviewMenu : public IMenu {
 public:
-    OverviewMenu(Game* game, State* state);
+    OverviewMenu(Game* game, IState* state);
 
     void Update(bool skipInput = false) override;
     void Render() override;

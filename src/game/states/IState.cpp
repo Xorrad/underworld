@@ -1,33 +1,33 @@
-#include "State.hpp"
-#include "game/ui/menus/Menu.hpp"
+#include "IState.hpp"
+#include "game/ui/menus/IMenu.hpp"
 
-State::State(Game* game) :
+IState::IState(Game* game) :
     m_Game(game),
     m_Menus(),
     m_FirstFrame(false)
 {}
 
-State::~State() {}
+IState::~IState() {}
 
-void State::PushMenu(UniquePtr<UI::Menu> menu) {
+void IState::PushMenu(UniquePtr<UI::IMenu> menu) {
     m_Menus.push(std::move(menu));
     m_FirstFrame = true;
 }
 
-void State::PopMenu() {
+void IState::PopMenu() {
     if (m_Menus.empty())
         return;
     m_Menus.pop();
     m_FirstFrame = true;
 }
 
-void State::Update() {
+void IState::Update() {
     if (m_Menus.empty())
         return;
     m_Menus.top()->Update(m_FirstFrame);
 }
 
-void State::Render() {
+void IState::Render() {
     if (m_Menus.empty())
         return;
     

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "game/states/State.hpp"
+#include "game/states/IState.hpp"
 
-class HomeState : public State {
+class HomeState : public IState {
 public:
     HomeState(Game* game);
 };

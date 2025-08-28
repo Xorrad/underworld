@@ -1,12 +1,12 @@
 #include "NewGameMenu.hpp"
 #include "game/Game.hpp"
-#include "game/states/State.hpp"
+#include "game/states/IState.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
 
 #include <fmt/format.h>
 
-UI::NewGameMenu::NewGameMenu(Game* game, State* state) : Menu(game, state) {}
+UI::NewGameMenu::NewGameMenu(Game* game, IState* state) : IMenu(game, state) {}
 
 void UI::NewGameMenu::Update(bool skipInput) {
     tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));

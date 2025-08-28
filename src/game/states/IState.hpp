@@ -1,11 +1,11 @@
 #pragma once
 
-class State {
+class IState {
 public:
-    State(Game* game);
-    virtual ~State();
+    IState(Game* game);
+    virtual ~IState();
     
-    void PushMenu(UniquePtr<UI::Menu> menu);
+    void PushMenu(UniquePtr<UI::IMenu> menu);
     void PopMenu();
 
     virtual void Update();
@@ -13,6 +13,6 @@ public:
 
 protected:
     Game* m_Game;
-    std::stack<UniquePtr<UI::Menu>> m_Menus;
+    std::stack<UniquePtr<UI::IMenu>> m_Menus;
     bool m_FirstFrame;
 };
