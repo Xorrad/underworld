@@ -5,6 +5,7 @@
 #include "game/core/world/City.hpp"
 
 #include <nlohmann/json.hpp>
+#include <lodepng/lodepng.h>
 
 Scenario::Scenario(std::string id, std::string name, std::string version, std::string dirPath) :
     m_Id(id),
@@ -55,11 +56,11 @@ std::vector<UniquePtr<Scenario>> Scenario::ListScenarios() {
 }
 
 void Scenario::Load(World* world) {
-    Scenario::LoadStates(world);
-    Scenario::LoadCountries(world);
-    Scenario::LoadCities(world);
-    Scenario::LoadStatesImage(world);
-    Scenario::LoadTerrainImage(world);
+    this->LoadStates(world);
+    this->LoadCountries(world);
+    this->LoadCities(world);
+    this->LoadStatesImage(world);
+    this->LoadTerrainImage(world);
 }
 
 void Scenario::LoadStates(World* world) {
@@ -110,7 +111,8 @@ void Scenario::LoadCities(World* world) {
 }
 
 void Scenario::LoadStatesImage(World* world) {
-
+    Image image = Image::LoadFromFile(m_DirPath + "/map/states_minimap.png");
+    world->SetStatesImage(MakeUnique<Image>(image.GetWidth(), image.GetHeight(), std::move(image.GetPixels())));
 }
 
 void Scenario::LoadTerrainImage(World* world) {

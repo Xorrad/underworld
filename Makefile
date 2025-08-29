@@ -29,7 +29,8 @@ OBJ_DIR     := bin/obj
 INCLUDE     := -I$(INCLUDE_DIR) -I$(VENDOR_DIR)
 
 # Sources and objects
-SRC          := $(shell find $(SRC_DIR)/*/ -type f -name '*.cpp')
+SRC          := $(shell find $(SRC_DIR)/*/ -type f -name '*.cpp') \
+				$(VENDOR_DIR)/lodepng/lodepng.cpp
 PCH_HEADER   := $(SRC_DIR)/pch.hpp
 PCH        	 := $(OBJ_DIR)/pch.hpp.gch
 OBJECTS        := $(SRC:%.cpp=$(OBJ_DIR)/%.o)

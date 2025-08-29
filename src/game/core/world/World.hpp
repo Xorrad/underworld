@@ -9,6 +9,9 @@ public:
     std::unordered_map<std::string, UniquePtr<State>>& GetStates();
     std::unordered_map<std::string, UniquePtr<Country>>& GetCountries();
     std::unordered_map<std::string, UniquePtr<City>>& GetCities();
+    
+    Image* GetStatesImage();
+    Image* GetMinimapImage();
 
     void SetScenario(UniquePtr<Scenario> scenario);
 
@@ -24,9 +27,14 @@ public:
     void RemoveCity(City* city);
     void RemoveCity(std::string id);
 
+    void SetStatesImage(UniquePtr<Image> statesImage);
+
 private:
     UniquePtr<Scenario> m_Scenario;
     std::unordered_map<std::string, UniquePtr<State>> m_States;
     std::unordered_map<std::string, UniquePtr<Country>> m_Countries;
     std::unordered_map<std::string, UniquePtr<City>> m_Cities;
+
+    UniquePtr<Image> m_StatesImage;
+    UniquePtr<Image> m_MinimapImage;
 };

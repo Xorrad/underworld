@@ -28,6 +28,10 @@ struct Color {
 		return (r << 24) + (g << 16) + (b << 8) + (a);
 	}
 
+	std::string ToHex() const {
+		return std::format("{:02x}{:02x}{:02x}", r, g, b);
+	}
+
 	static Color FromHex(uint32_t hex) {
 		uint8_t r = (hex >> 24) & 0xFF;
 		uint8_t g = (hex >> 16) & 0xFF;

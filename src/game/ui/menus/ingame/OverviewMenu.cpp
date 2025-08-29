@@ -1,5 +1,6 @@
 #include "OverviewMenu.hpp"
 #include "game/Game.hpp"
+#include "game/core/world/World.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
 
@@ -20,7 +21,9 @@ void UI::OverviewMenu::Render() {
     tuim::vec2 terminalSize = tuim::Terminal::GetTerminalSize();
     int headerHeight = 6;
     int alertsHeight = 10;
-    tuim::vec2 minimapSize = {(int) (80 * 52.f/terminalSize.y)+2, terminalSize.y-headerHeight+1}; //80, 52
+    // tuim::vec2 minimapSize = {80, 52};
+    tuim::vec2 minimapSize = {(int) (2 * 80 * ((float) (terminalSize.y-headerHeight+1) / 52.f))+2, terminalSize.y-headerHeight+1};
+    // tuim::vec2 minimapSize = {(int) (80 * 52.f/terminalSize.y)+2, terminalSize.y-headerHeight+1};
 
     tuim::Clear();
     tuim::BeginContainer("#screen", "", terminalSize, tuim::CONTAINER_FLAGS_BORDERLESS, tuim::ALIGN_NONE);
@@ -49,8 +52,7 @@ void UI::OverviewMenu::Render() {
     tuim::EndContainer();
     
     tuim::SetCurrentCursor({terminalSize.x-minimapSize.x, headerHeight-1});
-    tuim::BeginContainer("#container-minimap", "", minimapSize);
-    tuim::EndContainer();
+    tuim::Minimap("#container-minimap", minimapSize, static_cast<InGameState*>(m_State)->GetWorld());
 
     tuim::SetCurrentCursor({0, terminalSize.y-alertsHeight});
     tuim::BeginContainer("#container-alerts", "", {terminalSize.x-minimapSize.x+1, alertsHeight});
