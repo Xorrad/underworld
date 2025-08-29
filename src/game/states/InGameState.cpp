@@ -9,11 +9,30 @@
 
 InGameState::InGameState(Game* game, UniquePtr<World> world) :
     IState(game),
-    m_World(std::move(world))
+    m_World(std::move(world)),
+    m_GameSpeed(0)
 {
     this->PushMenu(MakeUnique<UI::OverviewMenu>(game, this));
 }
 
 World* InGameState::GetWorld() {
     return m_World.get();
+}
+
+int InGameState::GetGameSpeed() const {
+    return m_GameSpeed;
+}
+
+void InGameState::Update() {
+    if (m_Menus.empty())
+        return;
+    m_Menus.top()->Update(m_FirstFrame);
+
+    if (tuim::GetCtx()->m_ActiveItemId == 0) {
+        if (tuim::IsKeyPressed(tuim::SPACE)) m_GameSpeed = 0;
+        else if (tuim::IsKeyPressed(tuim::DIGIT_1)) m_GameSpeed = 1;
+        else if (tuim::IsKeyPressed(tuim::DIGIT_2)) m_GameSpeed = 2;
+        else if (tuim::IsKeyPressed(tuim::DIGIT_3)) m_GameSpeed = 3;
+        else if (tuim::IsKeyPressed(tuim::DIGIT_4)) m_GameSpeed = 4;
+    }
 }

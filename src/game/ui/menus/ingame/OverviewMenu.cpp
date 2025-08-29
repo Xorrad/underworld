@@ -1,5 +1,6 @@
 #include "OverviewMenu.hpp"
 #include "game/Game.hpp"
+#include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
 
 #include "game/states/HomeState.hpp"
@@ -30,7 +31,20 @@ void UI::OverviewMenu::Render() {
     tuim::SetCurrentCursor({1, 2}); tuim::Print("Money: $2.5M / $11.2M");
     tuim::SetCurrentCursor({30, 2}); tuim::Print("Members: 52");
     tuim::SetCurrentCursor({50, 2}); tuim::Print("Territories: 5");
-    tuim::SetCurrentCursor({terminalSize.x-2-11, 1}); tuim::Print("Speed #555555█&r███");
+
+    int gameSpeed = static_cast<InGameState*>(m_State)->GetGameSpeed();
+    if (gameSpeed == 0) {
+        tuim::SetCurrentCursor({terminalSize.x-2-7, 1}); tuim::Print("PAUSED");
+    }
+    else {
+        tuim::SetCurrentCursor({terminalSize.x-2-14, 1}); tuim::Print("Speed #555555");
+        for (int i = 0; i < gameSpeed; i++)
+            tuim::Print("█ ");
+        tuim::Print("&r");
+        for (int i = gameSpeed; i < 4; i++)
+            tuim::Print("█ ");
+    }
+
     tuim::SetCurrentCursor({terminalSize.x-2-20, 2}); tuim::Print("November 11th, 1987");
     tuim::EndContainer();
     
