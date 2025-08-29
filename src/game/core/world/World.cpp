@@ -1,9 +1,21 @@
 #include "World.hpp"
+#include "game/core/world/Scenario.hpp"
 #include "game/core/world/State.hpp"
 #include "game/core/world/Country.hpp"
 #include "game/core/world/City.hpp"
 
 World::World() {}
+
+World::World(UniquePtr<Scenario> scenario) :
+    m_Scenario(std::move(scenario)),
+    m_States(),
+    m_Countries(),
+    m_Cities()
+{}
+
+Scenario* World::GetScenario() {
+    return m_Scenario.get();
+}
 
 std::unordered_map<std::string, UniquePtr<State>>& World::GetStates() {
     return m_States;
@@ -15,6 +27,10 @@ std::unordered_map<std::string, UniquePtr<Country>>& World::GetCountries() {
 
 std::unordered_map<std::string, UniquePtr<City>>& World::GetCities() {
     return m_Cities;
+}
+
+void World::SetScenario(UniquePtr<Scenario> scenario) {
+    m_Scenario = std::move(scenario);
 }
 
 void World::AddState(UniquePtr<State> state) {

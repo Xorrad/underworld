@@ -6,6 +6,7 @@
 #include <cmath> // std::fmod, std::round...
 #include <charconv> // std::from_chars
 #include <unordered_map> // std::unordered_map
+#include <set> // std::set
 #include <tuim/tuim.hpp>
 
 #include "util/SignalHandler.hpp"
@@ -17,6 +18,7 @@ class HomeState;
 class InGameState;
 class Configuration;
 
+class Scenario;
 class World;
 class Country;
 class State;
@@ -30,5 +32,6 @@ namespace UI {
 }
 
 #include "util/Ptr.hpp"
+#include "util/File.hpp"
 #include "util/Color.hpp"
 #include "game/core/Configuration.hpp"

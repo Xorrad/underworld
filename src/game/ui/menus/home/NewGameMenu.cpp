@@ -1,5 +1,10 @@
 #include "NewGameMenu.hpp"
 #include "game/Game.hpp"
+#include "game/core/world/World.hpp"
+#include "game/core/world/Scenario.hpp"
+#include "game/core/world/Country.hpp"
+#include "game/core/world/State.hpp"
+#include "game/core/world/City.hpp"
 #include "game/states/IState.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
@@ -24,14 +29,14 @@ void UI::NewGameMenu::Render() {
     tuim::Print("Underworld: Organized Crime\n#666666Version {}&r\n\n", Configuration::buildVersion);
     tuim::Print("New Game\n");
     
-    static std::vector<std::string> scenarios = { "Central America", "Europe", "Asia" };
+    std::vector<UniquePtr<Scenario>> scenarios = Scenario::GetScenarios();
     static size_t selectedScenario = 0;
     tuim::Print("\t");
-    if (tuim::EnumInput("#input-scenario", "Scenario: < {} >", &selectedScenario, scenarios));
+    if (tuim::ScenarioInput("#input-scenario", "Scenario: < {} >", &selectedScenario, scenarios));
     tuim::Print("\n\n\t");
     
     if (tuim::Button("#button-start", "Start"))
-        m_Game->SetState(MakeUnique<InGameState>(m_Game));
+        m_Game->SetState(MakeUnique<InGameState>(m_Game, MakeUnique<World>(std::move(scenarios[selectedScenario]))));
     tuim::Print("\n\t");
 
     if (tuim::Button("#button-back", "Back"))

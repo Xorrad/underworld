@@ -4,7 +4,10 @@
 
 class InGameState : public IState {
 public:
-    InGameState(Game* game);
+    InGameState(Game* game, UniquePtr<World> world);
+
+    World* GetWorld();
 
 private:
+    UniquePtr<World> m_World;
 };
