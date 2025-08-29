@@ -1,0 +1,16 @@
+[
+    {
+        "id": "test_state1",
+        "name": "Test State 1",
+        "color": "#a9a9a9",
+        "capital": "test_city1",
+        "fertilities": []
+    },
+    {
+        "id": "test_state2",
+        "name": "Test State 2",
+        "color": "#434d4d",
+        "capital": "test_city2",
+        "fertilities": []
+    }
+]

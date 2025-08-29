@@ -1,0 +1,8 @@
+[
+    {
+        "id": "test_country",
+        "name": "Test Country",
+        "capital": "test_city1",
+        "states": [ "test_state1", "test_state2"]
+    }
+]
