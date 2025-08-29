@@ -46,7 +46,8 @@ bool tuim::ScenarioInput(const std::string& id, std::string_view fmt, size_t* in
     }
     else tuim::Print("[ ] ");
 
-    std::string text = std::vformat(fmt, std::make_format_args((entries.empty() ? "No Scenario Available" : entries.at(*index)->GetName())));
+    std::string scenarioName = (entries.empty() ? "No Scenario Available" : entries.at(*index)->GetName());
+    std::string text = std::vformat(fmt, std::make_format_args(scenarioName));
     item->m_Size = vec2(tuim::CalcTextWidth(text), 1);
     
     tuim::Print(text);
