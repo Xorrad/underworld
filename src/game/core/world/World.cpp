@@ -11,7 +11,9 @@ World::World(UniquePtr<Scenario> scenario) :
     m_States(),
     m_Countries(),
     m_Cities()
-{}
+{
+    m_Scenario->Load(this);
+}
 
 Scenario* World::GetScenario() {
     return m_Scenario.get();

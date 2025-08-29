@@ -29,7 +29,7 @@ std::string Scenario::GetDirPath() const {
     return m_DirPath;
 }
 
-std::vector<UniquePtr<Scenario>> Scenario::GetScenarios() {
+std::vector<UniquePtr<Scenario>> Scenario::ListScenarios() {
     std::vector<UniquePtr<Scenario>> scenarios;
 
     std::set<std::string> dirs = File::ListFiles(Configuration::dataPath + "/scenarios/", false);
@@ -54,20 +54,16 @@ std::vector<UniquePtr<Scenario>> Scenario::GetScenarios() {
     return scenarios;
 }
 
-UniquePtr<World> Scenario::Load(const std::string& scenario) {
-    UniquePtr<World> world = MakeUnique<World>();
-
-    Scenario::LoadStates(scenario, world.get());
-    Scenario::LoadCountries(scenario, world.get());
-    Scenario::LoadCities(scenario, world.get());
-    Scenario::LoadStatesImage(scenario, world.get());
-    Scenario::LoadTerrainImage(scenario, world.get());
-
-    return world;
+void Scenario::Load(World* world) {
+    Scenario::LoadStates(world);
+    Scenario::LoadCountries(world);
+    Scenario::LoadCities(world);
+    Scenario::LoadStatesImage(world);
+    Scenario::LoadTerrainImage(world);
 }
 
-void Scenario::LoadStates(const std::string& scenario, World* world) {
-    std::string filePath = Configuration::dataPath + "/scenarios/" + scenario + "/map/states.json";
+void Scenario::LoadStates(World* world) {
+    std::string filePath = m_DirPath + "/map/states.json";
     std::ifstream file(filePath, std::ios::binary);
     if (!file) return;
     
@@ -85,8 +81,8 @@ void Scenario::LoadStates(const std::string& scenario, World* world) {
     file.close();
 }
 
-void Scenario::LoadCountries(const std::string& scenario, World* world) {
-    std::string filePath = Configuration::dataPath + "/scenarios/" + scenario + "/map/countries.json";
+void Scenario::LoadCountries(World* world) {
+    std::string filePath = m_DirPath + "/map/countries.json";
     std::ifstream file(filePath, std::ios::binary);
     if (!file) return;
     
@@ -109,14 +105,14 @@ void Scenario::LoadCountries(const std::string& scenario, World* world) {
     file.close();
 }
 
-void Scenario::LoadCities(const std::string& scenario, World* world) {
+void Scenario::LoadCities(World* world) {
 
 }
 
-void Scenario::LoadStatesImage(const std::string& scenario, World* world) {
+void Scenario::LoadStatesImage(World* world) {
 
 }
 
-void Scenario::LoadTerrainImage(const std::string& scenario, World* world) {
+void Scenario::LoadTerrainImage(World* world) {
 
 }

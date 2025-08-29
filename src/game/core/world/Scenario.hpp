@@ -9,14 +9,15 @@ public:
     std::string GetVersion() const;
     std::string GetDirPath() const;
 
-    static std::vector<UniquePtr<Scenario>> GetScenarios();
-    static UniquePtr<World> Load(const std::string& scenario);
+    static std::vector<UniquePtr<Scenario>> ListScenarios();
+    void Load(World* world);
 
-    static void LoadStates(const std::string& scenario, World* world);
-    static void LoadCountries(const std::string& scenario, World* world);
-    static void LoadCities(const std::string& scenario, World* world);
-    static void LoadStatesImage(const std::string& scenario, World* world);
-    static void LoadTerrainImage(const std::string& scenario, World* world);
+private:
+    void LoadStates(World* world);
+    void LoadCountries(World* world);
+    void LoadCities(World* world);
+    void LoadStatesImage(World* world);
+    void LoadTerrainImage(World* world);
 
 private:
     std::string m_Id;

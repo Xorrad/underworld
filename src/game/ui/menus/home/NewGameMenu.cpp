@@ -29,7 +29,7 @@ void UI::NewGameMenu::Render() {
     tuim::Print("Underworld: Organized Crime\n#666666Version {}&r\n\n", Configuration::buildVersion);
     tuim::Print("New Game\n");
     
-    std::vector<UniquePtr<Scenario>> scenarios = Scenario::GetScenarios();
+    std::vector<UniquePtr<Scenario>> scenarios = Scenario::ListScenarios();
     static size_t selectedScenario = 0;
     tuim::Print("\t");
     if (tuim::ScenarioInput("#input-scenario", "Scenario: < {} >", &selectedScenario, scenarios));
