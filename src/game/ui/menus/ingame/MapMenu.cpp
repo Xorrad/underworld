@@ -25,7 +25,7 @@ void UI::MapMenu::Update(bool skipInput) {
     else if (tuim::IsKeyPressed(tuim::S) || tuim::GetPressedKey() == 'S') {
         Vec2<int> cursor = state->GetCursor();
         int movement = (tuim::GetPressedKey() == 'S') ? 10 : 1;
-        state->SetCursor({cursor.x, std::min((int) state->GetWorld()->GetStatesImage()->GetHeight(), cursor.y+movement)});
+        state->SetCursor({cursor.x, std::min((int) state->GetWorld()->GetStatesImage()->GetHeight()-1, cursor.y+movement)});
     }
     if (tuim::IsKeyPressed(tuim::Q) || tuim::GetPressedKey() == 'Q') {
         Vec2<int> cursor = state->GetCursor();
@@ -35,7 +35,7 @@ void UI::MapMenu::Update(bool skipInput) {
     else if (tuim::IsKeyPressed(tuim::D) || tuim::GetPressedKey() == 'D') {
         Vec2<int> cursor = state->GetCursor();
         int movement = (tuim::GetPressedKey() == 'D') ? 10 : 1;
-        state->SetCursor({std::min((int) state->GetWorld()->GetStatesImage()->GetWidth(), cursor.x+movement), cursor.y});
+        state->SetCursor({std::min((int) state->GetWorld()->GetStatesImage()->GetWidth()-1, cursor.x+movement), cursor.y});
     }
 }
 
@@ -51,6 +51,7 @@ void UI::MapMenu::Render() {
     tuim::Header(static_cast<InGameState*>(m_State));
 
     tuim::vec2 mapSize = {(int)(0.8f*terminalSize.x), terminalSize.y-UI::HEADER_HEIGHT+1};
+    if (mapSize.x % 2 == 1) mapSize.x += 1;
     tuim::SetCurrentCursor({terminalSize.x-mapSize.x, UI::HEADER_HEIGHT-1});
     tuim::BeginContainer("#container-minimap", "", {mapSize.x, mapSize.y});
     {
@@ -66,14 +67,10 @@ void UI::MapMenu::Render() {
         // Define the bounding box of the map.
         // It is rendered at real image size around the cursor.
         Vec2<int> origin = {
-            std::max(0, cursor.x - mapSize.x/2),
-            std::max(0, cursor.y - mapSize.y/2)
+            std::min((int) terrainImage->GetWidth() - mapSize.x/2 + 1, std::max(0, cursor.x - mapSize.x/4)),
+            std::min((int) terrainImage->GetHeight() - mapSize.y + 2, std::max(0, cursor.y - mapSize.y/2))
         };
-        
-        Vec2<int> end = {
-            std::min((int) terrainImage->GetWidth(), cursor.x + mapSize.x/2),
-            std::min((int) terrainImage->GetHeight(), cursor.y + mapSize.y/2)
-        };
+        Vec2<int> end = { origin.x + mapSize.x, origin.y + mapSize.y };
 
         for (uint32_t y = origin.y; y < end.y; y++) {
             for (uint32_t x = origin.x; x < end.x; x++) {
@@ -89,7 +86,7 @@ void UI::MapMenu::Render() {
         }
         tuim::Print("&r");
 
-        tuim::SetCurrentCursor({cursor.x - origin.x, cursor.y - origin.y});
+        tuim::SetCurrentCursor({2*(cursor.x - origin.x), cursor.y - origin.y});
         tuim::Print("#_ffffff  &r");
 
         tuim::SetCurrentCursor({0, mapSize.y-3});
