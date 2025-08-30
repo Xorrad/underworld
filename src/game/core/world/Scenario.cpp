@@ -111,7 +111,7 @@ void Scenario::LoadCities(World* world) {
 }
 
 void Scenario::LoadStatesImage(World* world) {
-    Image image = Image::LoadFromFile(m_DirPath + "/map/states_minimap.png");
+    Image image = Image::LoadFromFile(m_DirPath + "/map/states.png");
     world->SetStatesImage(MakeUnique<Image>(image.GetWidth(), image.GetHeight(), std::move(image.GetPixels())));
 }
 

@@ -3,8 +3,8 @@
 #include "game/core/world/World.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
-
 #include "game/states/HomeState.hpp"
+#include "game/ui/menus/ingame/MapMenu.hpp"
 
 UI::OverviewMenu::OverviewMenu(Game* game, IState* state) : IMenu(game, state) {}
 
@@ -15,52 +15,33 @@ void UI::OverviewMenu::Update(bool skipInput) {
         m_Game->SetState(MakeUnique<HomeState>(m_Game));
         return;
     }
+    
+    if (tuim::IsKeyPressed(tuim::M)) {
+        m_State->PushMenu(MakeUnique<UI::MapMenu>(m_Game, m_State));
+        return;
+    }
 }
 
 void UI::OverviewMenu::Render() {
     tuim::vec2 terminalSize = tuim::Terminal::GetTerminalSize();
-    int headerHeight = 6;
-    int alertsHeight = 10;
-    // tuim::vec2 minimapSize = {80, 52};
-    tuim::vec2 minimapSize = {(int) (2 * 80 * ((float) (terminalSize.y-headerHeight+1) / 52.f))+2, terminalSize.y-headerHeight+1};
-    // tuim::vec2 minimapSize = {(int) (80 * 52.f/terminalSize.y)+2, terminalSize.y-headerHeight+1};
 
     tuim::Clear();
     tuim::BeginContainer("#screen", "", terminalSize, tuim::CONTAINER_FLAGS_BORDERLESS, tuim::ALIGN_NONE);
 
-    tuim::BeginContainer("#container-header", "", {terminalSize.x, headerHeight});
-    tuim::Print("\n");
-    tuim::SetCurrentCursor({1, 1}); tuim::Print("Your Organization Name");
-    tuim::SetCurrentCursor({1, 2}); tuim::Print("Money: $2.5M / $11.2M");
-    tuim::SetCurrentCursor({30, 2}); tuim::Print("Members: 52");
-    tuim::SetCurrentCursor({50, 2}); tuim::Print("Territories: 5");
-
-    int gameSpeed = static_cast<InGameState*>(m_State)->GetGameSpeed();
-    if (gameSpeed == 0) {
-        tuim::SetCurrentCursor({terminalSize.x-2-7, 1}); tuim::Print("PAUSED");
-    }
-    else {
-        tuim::SetCurrentCursor({terminalSize.x-2-14, 1}); tuim::Print("Speed #555555");
-        for (int i = 0; i < gameSpeed; i++)
-            tuim::Print("█ ");
-        tuim::Print("&r");
-        for (int i = gameSpeed; i < 4; i++)
-            tuim::Print("█ ");
-    }
-
-    tuim::SetCurrentCursor({terminalSize.x-2-20, 2}); tuim::Print("November 11th, 1987");
-    tuim::EndContainer();
+    tuim::Header(static_cast<InGameState*>(m_State));
     
-    tuim::SetCurrentCursor({terminalSize.x-minimapSize.x, headerHeight-1});
+    tuim::vec2 minimapSize = {(int) (2 * 80 * ((float) (terminalSize.y-UI::HEADER_HEIGHT+1) / 52.f))+2, terminalSize.y-UI::HEADER_HEIGHT+1};
+    tuim::SetCurrentCursor({terminalSize.x-minimapSize.x, UI::HEADER_HEIGHT-1});
     tuim::Minimap("#container-minimap", minimapSize, static_cast<InGameState*>(m_State)->GetWorld());
 
+    int alertsHeight = 10;
     tuim::SetCurrentCursor({0, terminalSize.y-alertsHeight});
     tuim::BeginContainer("#container-alerts", "", {terminalSize.x-minimapSize.x+1, alertsHeight});
     tuim::Print("One of your warehouse in Sinaloa has been raided!");
     tuim::EndContainer();
 
-    tuim::SetCurrentCursor({0, headerHeight-1});
-    tuim::BeginContainer("#container-menus", "", {terminalSize.x-minimapSize.x+1, terminalSize.y-headerHeight-alertsHeight+2});
+    tuim::SetCurrentCursor({0, UI::HEADER_HEIGHT-1});
+    tuim::BeginContainer("#container-menus", "", {terminalSize.x-minimapSize.x+1, terminalSize.y-UI::HEADER_HEIGHT-alertsHeight+2});
     tuim::Print("Underworld: Organized Crime\n#666666Version {}&r\n\n", Configuration::buildVersion);
     
     tuim::Print("\t");

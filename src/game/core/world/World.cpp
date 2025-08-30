@@ -36,10 +36,6 @@ Image* World::GetStatesImage() {
     return m_StatesImage.get();
 }
 
-Image* GetMinimapImage(uint32_t width, uint32_t height) {
-
-}
-
 void World::SetScenario(UniquePtr<Scenario> scenario) {
     m_Scenario = std::move(scenario);
 }

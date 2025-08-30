@@ -1,6 +1,34 @@
 #include "Misc.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/core/world/World.hpp"
+#include "game/core/world/World.hpp"
+
+void tuim::Header(InGameState* state) {
+    tuim::vec2 terminalSize = tuim::Terminal::GetTerminalSize();
+
+    tuim::BeginContainer("#container-header", "", {terminalSize.x, UI::HEADER_HEIGHT});
+    tuim::Print("\n");
+    tuim::SetCurrentCursor({1,  1}); tuim::Print("Your Organization Name");
+    tuim::SetCurrentCursor({1,  2}); tuim::Print("Money: $2.5M / $11.2M");
+    tuim::SetCurrentCursor({30, 2}); tuim::Print("Members: 52");
+    tuim::SetCurrentCursor({50, 2}); tuim::Print("Territories: 5");
+
+    int gameSpeed = state->GetGameSpeed();
+    if (gameSpeed == 0) {
+        tuim::SetCurrentCursor({terminalSize.x-2-7, 1}); tuim::Print("PAUSED");
+    }
+    else {
+        tuim::SetCurrentCursor({terminalSize.x-2-14, 1}); tuim::Print("Speed #555555");
+        for (int i = 0; i < gameSpeed; i++)
+            tuim::Print("█ ");
+        tuim::Print("&r");
+        for (int i = gameSpeed; i < 4; i++)
+            tuim::Print("█ ");
+    }
+
+    tuim::SetCurrentCursor({terminalSize.x-2-20, 2}); tuim::Print("November 11th, 1987");
+    tuim::EndContainer();
+}
 
 void tuim::Minimap(const std::string& id, vec2 size, World* world) {
     tuim::BeginContainer(id, "", size);
@@ -32,5 +60,7 @@ void tuim::Minimap(const std::string& id, vec2 size, World* world) {
     }
     tuim::Print("&r");
 
+    tuim::SetCurrentCursor(vec2(0, size.y-3));
+    tuim::Print("#_666666Press M to open map&r");
     tuim::EndContainer();
 }

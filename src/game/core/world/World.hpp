@@ -11,7 +11,6 @@ public:
     std::unordered_map<std::string, UniquePtr<City>>& GetCities();
     
     Image* GetStatesImage();
-    Image* GetMinimapImage();
 
     void SetScenario(UniquePtr<Scenario> scenario);
 

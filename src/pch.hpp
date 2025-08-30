@@ -30,10 +30,13 @@ namespace UI {
     class HomeMenu;
     class SettingsMenu;
     class OverviewMenu;
+    class MapMenu;
 }
 
 #include "util/Ptr.hpp"
+#include "util/Vec2.hpp"
 #include "util/File.hpp"
 #include "util/Color.hpp"
 #include "util/Image.hpp"
 #include "game/core/Configuration.hpp"
+#include "game/ui/Defines.hpp"

@@ -10,7 +10,8 @@
 InGameState::InGameState(Game* game, UniquePtr<World> world) :
     IState(game),
     m_World(std::move(world)),
-    m_GameSpeed(0)
+    m_GameSpeed(0),
+    m_Cursor({(int) m_World->GetStatesImage()->GetWidth()/2, (int) m_World->GetStatesImage()->GetHeight()/2})
 {
     this->PushMenu(MakeUnique<UI::OverviewMenu>(game, this));
 }
@@ -21,6 +22,14 @@ World* InGameState::GetWorld() {
 
 int InGameState::GetGameSpeed() const {
     return m_GameSpeed;
+}
+
+Vec2<int> InGameState::GetCursor() const {
+    return m_Cursor;
+}
+
+void InGameState::SetCursor(Vec2<int> cursor) {
+    m_Cursor = cursor;   
 }
 
 void InGameState::Update() {
