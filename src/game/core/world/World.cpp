@@ -11,7 +11,9 @@ World::World(UniquePtr<Scenario> scenario) :
     m_States(),
     m_Countries(),
     m_Cities(),
-    m_StatesImage(nullptr)
+    m_StatesImage(nullptr),
+    m_TerrainImage(nullptr),
+    m_Terrain()
 {
     m_Scenario->Load(this);
 }
@@ -34,6 +36,14 @@ std::unordered_map<std::string, UniquePtr<City>>& World::GetCities() {
 
 Image* World::GetStatesImage() {
     return m_StatesImage.get();
+}
+
+Image* World::GetTerrainImage() {
+    return m_TerrainImage.get();
+}
+
+std::vector<std::vector<std::string>>& World::GetTerrain() {
+    return m_Terrain;
 }
 
 void World::SetScenario(UniquePtr<Scenario> scenario) {
@@ -78,4 +88,12 @@ void World::RemoveCity(std::string id) {
 
 void World::SetStatesImage(UniquePtr<Image> statesImage) {
     m_StatesImage = std::move(statesImage);
+}
+
+void World::SetTerrainImage(UniquePtr<Image> terrainImage) {
+    m_TerrainImage = std::move(terrainImage);
+}
+
+void World::SetTerrain(std::vector<std::vector<std::string>> terrain) {
+    m_Terrain = terrain;
 }

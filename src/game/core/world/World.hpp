@@ -11,6 +11,8 @@ public:
     std::unordered_map<std::string, UniquePtr<City>>& GetCities();
     
     Image* GetStatesImage();
+    Image* GetTerrainImage();
+    std::vector<std::vector<std::string>>& GetTerrain();
 
     void SetScenario(UniquePtr<Scenario> scenario);
 
@@ -27,6 +29,8 @@ public:
     void RemoveCity(std::string id);
 
     void SetStatesImage(UniquePtr<Image> statesImage);
+    void SetTerrainImage(UniquePtr<Image> terrainImage);
+    void SetTerrain(std::vector<std::vector<std::string>> terrain);
 
 private:
     UniquePtr<Scenario> m_Scenario;
@@ -35,5 +39,7 @@ private:
     std::unordered_map<std::string, UniquePtr<City>> m_Cities;
 
     UniquePtr<Image> m_StatesImage;
+    UniquePtr<Image> m_TerrainImage;
     UniquePtr<Image> m_MinimapImage;
+    std::vector<std::vector<std::string>> m_Terrain;
 };

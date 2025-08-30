@@ -7,6 +7,7 @@
 #include <charconv> // std::from_chars
 #include <unordered_map> // std::unordered_map
 #include <set> // std::set
+#include <sstream> // std::getline
 #include <tuim/tuim.hpp>
 
 #include "util/SignalHandler.hpp"

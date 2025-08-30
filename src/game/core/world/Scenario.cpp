@@ -38,7 +38,6 @@ std::vector<UniquePtr<Scenario>> Scenario::ListScenarios() {
     for (auto& dir : dirs) {
         if (!std::filesystem::is_directory(dir))
             continue;
-        std::cout << dir << std::endl;
 
         std::ifstream descFile(dir + "/description.json", std::ios::binary);
         if (!descFile)
@@ -116,5 +115,29 @@ void Scenario::LoadStatesImage(World* world) {
 }
 
 void Scenario::LoadTerrainImage(World* world) {
+    // Load the terrain coloring image.
+    Image image = Image::LoadFromFile(m_DirPath + "/map/terrain.png");
+    world->SetTerrainImage(MakeUnique<Image>(image.GetWidth(), image.GetHeight(), std::move(image.GetPixels())));
 
+    // Ignore ascii terrain for now since the map looks way better
+    // with colored terrain and no character.
+    
+    // Load the ascii terrain file.
+    // std::string filePath = m_DirPath + "/map/terrain.txt";
+    // std::ifstream file(filePath, std::ios::binary);
+    // if (!file) return;
+    // std::vector<std::vector<std::string>> lines;
+    // std::string line;
+    // while (std::getline(file, line)) {
+    //     std::vector<std::string> characters;
+
+    //     for (int i = 0; i < line.size();) {
+    //         int charLength = tuim::Utf8CharLength(line[i]);
+    //         characters.push_back(line.substr(i, charLength));
+    //         i += charLength;
+    //     }
+
+    //     lines.push_back(characters);
+    // }
+    // world->SetTerrain(lines);
 }

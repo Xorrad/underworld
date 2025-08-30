@@ -54,8 +54,12 @@ void UI::MapMenu::Render() {
     tuim::SetCurrentCursor({terminalSize.x-mapSize.x, UI::HEADER_HEIGHT-1});
     tuim::BeginContainer("#container-minimap", "", {mapSize.x, mapSize.y});
     {
+        // All images should be the same size.
         ::Image* statesImage = world->GetStatesImage();
-        auto& pixels = statesImage->GetPixels();
+        ::Image* terrainImage = world->GetTerrainImage();
+        auto& statesPixels = statesImage->GetPixels();
+        auto& terrainPixels = terrainImage->GetPixels();
+        auto& terrainCharacters = world->GetTerrain();
 
         ::Color previousColor = ::Color(0, 0, 0, 0);
 
@@ -67,17 +71,18 @@ void UI::MapMenu::Render() {
         };
         
         Vec2<int> end = {
-            std::min((int) statesImage->GetWidth(), cursor.x + mapSize.x/2),
-            std::min((int) statesImage->GetHeight(), cursor.y + mapSize.y/2)
+            std::min((int) terrainImage->GetWidth(), cursor.x + mapSize.x/2),
+            std::min((int) terrainImage->GetHeight(), cursor.y + mapSize.y/2)
         };
 
         for (uint32_t y = origin.y; y < end.y; y++) {
             for (uint32_t x = origin.x; x < end.x; x++) {
-                uint32_t index = y * statesImage->GetWidth() + x;
-                if (previousColor != pixels[index]) {
-                    previousColor = pixels[index];
+                uint32_t index = y * terrainImage->GetWidth() + x;
+                if (previousColor != terrainPixels[index]) {
+                    previousColor = terrainPixels[index];
                     tuim::Print("#_" + previousColor.ToHex());
                 }
+                // tuim::Print("{}{}", terrainCharacters[y][2*x], terrainCharacters[y][2*x+1]);
                 tuim::Print("  ");
             }
             tuim::Print("\n");
