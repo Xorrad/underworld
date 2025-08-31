@@ -6,6 +6,7 @@ class Game {
 public:
     Game();
 
+    IState* GetState();
     bool IsRunning() const;
 
     void SetState(UniquePtr<IState> state);
@@ -18,5 +19,5 @@ public:
 private:
     std::vector<const char*> m_Args;
     UniquePtr<IState> m_State;
-    bool m_IsRunning;
+    std::atomic<bool> m_IsRunning;
 };

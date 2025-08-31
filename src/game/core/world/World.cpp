@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include "game/states/InGameState.hpp"
 #include "game/core/world/Scenario.hpp"
 #include "game/core/world/State.hpp"
 #include "game/core/world/Country.hpp"
@@ -18,6 +19,10 @@ World::World(UniquePtr<Scenario> scenario) :
     m_Date(Date::Epoch())
 {
     m_Scenario->Load(this);
+}
+
+std::mutex& World::GetMutex() {
+    return m_Mutex;
 }
 
 Scenario* World::GetScenario() {
@@ -122,4 +127,8 @@ void World::AddDefine(const std::string& name, nlohmann::json value) {
 
 void World::SetDate(Date date) {
     m_Date = date;
+}
+
+void World::Update(InGameState* state) {
+    m_Date = m_Date + 1;
 }

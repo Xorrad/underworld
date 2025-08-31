@@ -12,7 +12,7 @@ void UI::OverviewMenu::Update(bool skipInput) {
     tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));
 
     if (tuim::IsKeyPressed(tuim::BACKSPACE)) {
-        m_Game->SetState(MakeUnique<HomeState>(m_Game));
+        dynamic_cast<InGameState*>(m_State)->SetExitToHomeMenu(true);
         return;
     }
     

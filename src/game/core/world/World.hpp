@@ -7,6 +7,8 @@ public:
     World();
     World(UniquePtr<Scenario> scenario);
 
+    std::mutex& GetMutex();
+
     Scenario* GetScenario();
     std::unordered_map<std::string, UniquePtr<State>>& GetStates();
     std::unordered_map<std::string, UniquePtr<Country>>& GetCountries();
@@ -42,7 +44,11 @@ public:
     void AddDefine(const std::string& name, nlohmann::json value);
     void SetDate(Date date);
 
+    void Update(InGameState* state);
+
 private:
+    std::mutex m_Mutex;
+
     UniquePtr<Scenario> m_Scenario;
     std::unordered_map<std::string, UniquePtr<State>> m_States;
     std::unordered_map<std::string, UniquePtr<Country>> m_Countries;

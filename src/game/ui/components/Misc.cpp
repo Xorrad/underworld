@@ -13,21 +13,21 @@ void tuim::Header(InGameState* state) {
     tuim::SetCurrentCursor({30, 2}); tuim::Print("Members: 52");
     tuim::SetCurrentCursor({50, 2}); tuim::Print("Territories: 5");
 
-    int gameSpeed = state->GetGameSpeed();
-    if (gameSpeed == 0) {
+    if (state->IsPaused()) {
         tuim::SetCurrentCursor({terminalSize.x-2-7, 1}); tuim::Print("PAUSED");
     }
     else {
-        tuim::SetCurrentCursor({terminalSize.x-2-14, 1}); tuim::Print("Speed #555555");
+        int gameSpeed = state->GetGameSpeed();
+        tuim::SetCurrentCursor({terminalSize.x-2-16, 1}); tuim::Print("Speed #555555");
         for (int i = 0; i < gameSpeed; i++)
             tuim::Print("█ ");
         tuim::Print("&r");
-        for (int i = gameSpeed; i < 4; i++)
+        for (int i = gameSpeed; i < 5; i++)
             tuim::Print("█ ");
     }
 
     std::string date = static_cast<InGameState*>(state)->GetWorld()->GetDate().ToStringFormatted();
-    tuim::SetCurrentCursor({terminalSize.x-2-(int) tuim::CalcTextWidth(date), 2}); tuim::Print(date);
+    tuim::SetCurrentCursor({terminalSize.x-3-(int) tuim::CalcTextWidth(date), 2}); tuim::Print(date);
     tuim::EndContainer();
 }
 
