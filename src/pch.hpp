@@ -19,6 +19,7 @@ class HomeState;
 class InGameState;
 class Configuration;
 class Image;
+class Date;
 
 class Scenario;
 class World;
@@ -39,5 +40,6 @@ namespace UI {
 #include "util/File.hpp"
 #include "util/Color.hpp"
 #include "util/Image.hpp"
+#include "util/Date.hpp"
 #include "game/core/Configuration.hpp"
 #include "game/ui/Defines.hpp"
