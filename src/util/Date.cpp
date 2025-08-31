@@ -148,6 +148,10 @@ std::string Date::ToString() const {
 }
 
 std::string Date::ToStringFormatted() const {
+    return fmt::format("{} {}, {} {:02}:00", Date::MONTHS[month-1], day, year, hour);
+}
+
+std::string Date::ToStringFormatted12H() const {
     return fmt::format("{} {}, {} {}:00 {}", Date::MONTHS[month-1], day, year, (hour % 12), (hour < 12 ? "AM" : "PM"));
 }
 

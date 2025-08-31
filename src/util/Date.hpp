@@ -17,6 +17,7 @@ public:
     long ToHours() const;
     std::string ToString() const;
     std::string ToStringFormatted() const;
+    std::string ToStringFormatted12H() const;
 
     // Comparison operators
     bool operator==(const Date& other) const;

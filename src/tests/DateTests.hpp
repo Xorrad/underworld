@@ -123,8 +123,10 @@ TEST_CASE("[date] Conversion to string") {
     CHECK(d2.ToString() == "20-12-31 23H");
     CHECK(Date::FromString(d1.ToString()) == d1);
     CHECK(Date::FromString(d2.ToString()) == d2);
-    CHECK(d1.ToStringFormatted() == "June 1, 2000 3:00 AM");
-    CHECK(d2.ToStringFormatted() == "December 31, 20 11:00 PM");
+    CHECK(d1.ToStringFormatted() == "June 1, 2000 03:00");
+    CHECK(d2.ToStringFormatted() == "December 31, 20 23:00");
+    CHECK(d1.ToStringFormatted12H() == "June 1, 2000 3:00 AM");
+    CHECK(d2.ToStringFormatted12H() == "December 31, 20 11:00 PM");
 }
 
 TEST_CASE("[date] Comparison operators") {
