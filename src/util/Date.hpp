@@ -15,6 +15,8 @@ public:
     static Date FromString(const std::string& str);
     long DaysSinceEpoch() const;
     long ToHours() const;
+    std::string ToString() const;
+    std::string ToStringFormatted() const;
 
     // Comparison operators
     bool operator==(const Date& other) const;
@@ -35,6 +37,7 @@ public:
     int day;
     int hour;
 
-private:
+public:
+    static const std::vector<std::string_view> MONTHS;
     static const Date EPOCH;
 };

@@ -116,6 +116,17 @@ TEST_CASE("[date] Conversion to and from hours") {
     }
 }
 
+TEST_CASE("[date] Conversion to string") {
+    Date d1(2000, 6, 1, 3);
+    Date d2(20, 12, 31, 23);
+    CHECK(d1.ToString() == "2000-06-01 03H");
+    CHECK(d2.ToString() == "20-12-31 23H");
+    CHECK(Date::FromString(d1.ToString()) == d1);
+    CHECK(Date::FromString(d2.ToString()) == d2);
+    CHECK(d1.ToStringFormatted() == "June 1, 2000 3:00 AM");
+    CHECK(d2.ToStringFormatted() == "December 31, 20 11:00 PM");
+}
+
 TEST_CASE("[date] Comparison operators") {
     Date d1(2000, 5, 10, 10);
     Date d2(2000, 5, 10, 12);

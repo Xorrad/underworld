@@ -1,5 +1,8 @@
 #include "Date.hpp"
 
+#include <fmt/format.h>
+
+const std::vector<std::string_view> Date::MONTHS = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 const Date Date::EPOCH = Date(0, 1, 1, 0);
 
 Date::Date() : Date(0, 0, 0, 0) {}
@@ -103,11 +106,14 @@ Date Date::FromString(const std::string& str) {
         throw std::invalid_argument("Invalid date part, expected 'YYYY-M-D': " + parts[0]);
     }
 
+    std::string hour = parts[1];
+    if (hour.ends_with('h') || hour.ends_with('H')) hour.pop_back();
+
     try {
         int y = std::stoi(ymd[0]);
         int m = std::stoi(ymd[1]);
         int d = std::stoi(ymd[2]);
-        int h = std::stoi(parts[1]);
+        int h = std::stoi(hour);
 
         return Date(y, m, d, h);
     } catch (const std::exception&) {
@@ -135,6 +141,14 @@ long Date::DaysSinceEpoch() const {
 
 long Date::ToHours() const {
     return DaysSinceEpoch() * 24 + hour;
+}
+
+std::string Date::ToString() const {
+    return fmt::format("{}-{:02}-{:02} {:02}H", year, month, day, hour);
+}
+
+std::string Date::ToStringFormatted() const {
+    return fmt::format("{} {}, {} {}:00 {}", Date::MONTHS[month-1], day, year, (hour % 12), (hour < 12 ? "AM" : "PM"));
 }
 
 // ---- Comparison ----
