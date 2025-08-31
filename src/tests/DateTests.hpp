@@ -70,6 +70,14 @@ TEST_CASE("[date] Epoch behavior") {
     CHECK((d1 - epoch) == 24);
 }
 
+TEST_CASE("[date] Conversion from string") {
+    Date d1(2000, 6, 1, 3);
+    Date d2(20, 12, 31, 23);
+    CHECK(d1 == Date::FromString("2000-6-1 3"));
+    CHECK(d1 == Date::FromString("2000-06-01 03"));
+    CHECK(d2 == Date::FromString("20-12-31 23"));
+}
+
 TEST_CASE("[date] Conversion to and from hours") {
     Date epoch = Date::Epoch();  // 0000-01-01 00h
 

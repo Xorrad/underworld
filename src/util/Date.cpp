@@ -77,6 +77,44 @@ Date Date::FromHours(long hours) {
     return Date(y, m, d, h);
 }
 
+Date Date::FromString(const std::string& str) {
+    // Expected format: YYYY-M-D H
+    // Example: "2024-3-5 9" or "1-1-1 0"
+
+    auto Split = [](const std::string& str, char delimiter) {
+        std::vector<std::string> parts;
+        std::string token;
+        std::istringstream iss(str);
+        while (std::getline(iss, token, delimiter)) {
+            parts.push_back(token);
+        }
+        return parts;
+    };
+
+    // Split into "date" and "hour".
+    auto parts = Split(str, ' ');
+    if (parts.size() != 2) {
+        throw std::invalid_argument("Invalid format, expected 'YYYY-M-D H': " + str);
+    }
+
+    // Split "date" into year, month, day.
+    auto ymd = Split(parts[0], '-');
+    if (ymd.size() != 3) {
+        throw std::invalid_argument("Invalid date part, expected 'YYYY-M-D': " + parts[0]);
+    }
+
+    try {
+        int y = std::stoi(ymd[0]);
+        int m = std::stoi(ymd[1]);
+        int d = std::stoi(ymd[2]);
+        int h = std::stoi(parts[1]);
+
+        return Date(y, m, d, h);
+    } catch (const std::exception&) {
+        throw std::invalid_argument("Invalid numeric values in date string: " + str);
+    }
+}
+
 long Date::DaysSinceEpoch() const {
     long long days = 0;
     if (year >= Date::EPOCH.year) {
