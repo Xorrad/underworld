@@ -56,3 +56,15 @@ public:
 // Non-member scalar * vector
 template <typename T>
 Vec2<T> operator*(T scalar, const Vec2<T>& v);
+
+// Hash function for unordered maps.
+namespace std {
+    template <typename T>
+    struct hash<Vec2<T>> {
+        std::size_t operator()(const Vec2<T>& v) const noexcept {
+            std::size_t h1 = std::hash<T>{}(v.x);
+            std::size_t h2 = std::hash<T>{}(v.y);
+            return h1 ^ (h2 << 1);
+        }
+    };
+}

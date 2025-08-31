@@ -35,7 +35,7 @@ void Game::Init(int argc, char* argv[]) {
     // Initialize tuim.
     tuim::CreateContext(argc, argv);
     tuim::SetTitle("Underworld: Organized Crime");
-    tuim::SetFramerate(60.f);
+    tuim::SetFramerate(1.f);
     tuim::DefineStyle('b', tuim::Style::BOLD);
     tuim::DefineStyle('d', tuim::Style::FAINT);
     tuim::DefineStyle('i', tuim::Style::ITALIC);

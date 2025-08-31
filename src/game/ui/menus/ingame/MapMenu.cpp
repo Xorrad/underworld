@@ -1,6 +1,7 @@
 #include "MapMenu.hpp"
 #include "game/Game.hpp"
 #include "game/core/world/World.hpp"
+#include "game/core/world/City.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
 
@@ -79,8 +80,8 @@ void UI::MapMenu::Render() {
                     previousColor = terrainPixels[index];
                     tuim::Print("#_" + previousColor.ToHex());
                 }
-                // tuim::Print("{}{}", terrainCharacters[y][2*x], terrainCharacters[y][2*x+1]);
                 tuim::Print("  ");
+                // tuim::Print("{}{}", terrainCharacters[y][2*x], terrainCharacters[y][2*x+1]);
             }
             tuim::Print("\n");
         }
@@ -88,6 +89,24 @@ void UI::MapMenu::Render() {
 
         tuim::SetCurrentCursor({2*(cursor.x - origin.x), cursor.y - origin.y});
         tuim::Print("#_ffffff  &r");
+
+        for (auto& [id, city] : world->GetCities()) {
+            if (city->GetPosition().x < origin.x
+                || city->GetPosition().x > end.x
+                || city->GetPosition().y < origin.y
+                || city->GetPosition().y > end.y)
+                continue;
+            // Display the cursor over the city icon, but not the name.
+            if (cursor != city->GetPosition()) {
+                tuim::SetCurrentCursor({2*(city->GetPosition().x - origin.x), city->GetPosition().y - origin.y});
+                tuim::Print("#_666666🏘 &r");
+            }
+            if (city->GetPosition().y > origin.y) {
+                int x = 2*(city->GetPosition().x - origin.x) - (int)(tuim::CalcTextWidth(city->GetName())/2)+1;
+                tuim::SetCurrentCursor({std::max(0, x), city->GetPosition().y - 1 - origin.y});
+                tuim::Print("#_ffffff#000000{}&r", (x < 0 ? city->GetName().substr(-x) : city->GetName()));
+            }
+        }
 
         tuim::SetCurrentCursor({0, mapSize.y-3});
         tuim::Print("#_666666Press M to open map&r");

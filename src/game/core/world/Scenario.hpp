@@ -14,9 +14,9 @@ public:
 
 private:
     void LoadDefines(World* world);
+    void LoadCities(World* world);
     void LoadStates(World* world);
     void LoadCountries(World* world);
-    void LoadCities(World* world);
     void LoadStatesImage(World* world);
     void LoadTerrainImage(World* world);
 

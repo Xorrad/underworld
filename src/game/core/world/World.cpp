@@ -41,6 +41,13 @@ std::unordered_map<std::string, UniquePtr<City>>& World::GetCities() {
     return m_Cities;
 }
 
+City* World::GetCity(Vec2<int> position) {
+    auto it = m_CitiesByPosition.find(position);
+    if (it == m_CitiesByPosition.end())
+        return nullptr;
+    return it->second;
+}
+
 Image* World::GetStatesImage() {
     return m_StatesImage.get();
 }
@@ -94,14 +101,17 @@ void World::RemoveCountry(std::string id) {
 }
 
 void World::AddCity(UniquePtr<City> city) {
+    m_CitiesByPosition[city->GetPosition()] = city.get();
     m_Cities[city->GetId()] = std::move(city);
 }
 
 void World::RemoveCity(City* city) {
+    m_CitiesByPosition.erase(city->GetPosition());
     m_Cities.erase(city->GetId());
 }
 
 void World::RemoveCity(std::string id) {
+    m_CitiesByPosition.erase(m_Cities[id]->GetPosition());
     m_Cities.erase(id);
 }
 
