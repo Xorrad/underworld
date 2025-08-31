@@ -13,7 +13,9 @@ World::World(UniquePtr<Scenario> scenario) :
     m_Cities(),
     m_StatesImage(nullptr),
     m_TerrainImage(nullptr),
-    m_Terrain()
+    m_Terrain(),
+    m_Defines({}),
+    m_Date(Date::Epoch())
 {
     m_Scenario->Load(this);
 }
@@ -44,6 +46,18 @@ Image* World::GetTerrainImage() {
 
 std::vector<std::vector<std::string>>& World::GetTerrain() {
     return m_Terrain;
+}
+
+nlohmann::json World::GetDefines() const {
+    return m_Defines;
+}
+
+nlohmann::json World::GetDefine(const std::string& name) const {
+    return m_Defines[name];
+}
+
+Date World::GetDate() const {
+    return m_Date;
 }
 
 void World::SetScenario(UniquePtr<Scenario> scenario) {
@@ -96,4 +110,16 @@ void World::SetTerrainImage(UniquePtr<Image> terrainImage) {
 
 void World::SetTerrain(std::vector<std::vector<std::string>> terrain) {
     m_Terrain = terrain;
+}
+
+void World::SetDefines(nlohmann::json defines) {
+    m_Defines = defines;
+}
+
+void World::AddDefine(const std::string& name, nlohmann::json value) {
+    m_Defines[name] = value;
+}
+
+void World::SetDate(Date date) {
+    m_Date = date;
 }

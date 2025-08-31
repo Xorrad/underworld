@@ -13,6 +13,7 @@ public:
     void Load(World* world);
 
 private:
+    void LoadDefines(World* world);
     void LoadStates(World* world);
     void LoadCountries(World* world);
     void LoadCities(World* world);

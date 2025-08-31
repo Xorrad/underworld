@@ -26,7 +26,8 @@ void tuim::Header(InGameState* state) {
             tuim::Print("█ ");
     }
 
-    tuim::SetCurrentCursor({terminalSize.x-2-20, 2}); tuim::Print("November 11th, 1987");
+    std::string date = static_cast<InGameState*>(state)->GetWorld()->GetDate().ToStringFormatted();
+    tuim::SetCurrentCursor({terminalSize.x-2-(int) tuim::CalcTextWidth(date), 2}); tuim::Print(date);
     tuim::EndContainer();
 }
 

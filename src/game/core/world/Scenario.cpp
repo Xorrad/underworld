@@ -55,11 +55,26 @@ std::vector<UniquePtr<Scenario>> Scenario::ListScenarios() {
 }
 
 void Scenario::Load(World* world) {
+    this->LoadDefines(world);
     this->LoadStates(world);
     this->LoadCountries(world);
     this->LoadCities(world);
     this->LoadStatesImage(world);
     this->LoadTerrainImage(world);
+}
+
+void Scenario::LoadDefines(World* world) {
+    // Parse the defines file.
+    std::string filePath = m_DirPath + "/defines/defines.json";
+    std::ifstream file(filePath, std::ios::binary);
+    if (!file) return;
+    nlohmann::json data = nlohmann::json::parse(file);
+    
+    // Initialize value depending on a define.
+    world->SetDate(Date::FromString(data["startDate"]));
+
+    // Store all defines to allow accessing them anytime.
+    world->SetDefines(std::move(data));
 }
 
 void Scenario::LoadStates(World* world) {

@@ -33,6 +33,8 @@ void InGameState::SetCursor(Vec2<int> cursor) {
 }
 
 void InGameState::Update() {
+    m_World->SetDate(m_World->GetDate() + (1 * m_GameSpeed*m_GameSpeed));
+
     if (m_Menus.empty())
         return;
     m_Menus.top()->Update(m_FirstFrame);
