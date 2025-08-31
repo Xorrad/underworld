@@ -41,31 +41,31 @@
     {
         "id": "usa",
         "name": "United States of America",
-        "capital": "washington_dc",
+        "capital": "",
         "states": [ "usa_state" ]
     },
     {
         "id": "guatemala",
         "name": "Guatemala",
-        "capital": "guatemala_city",
+        "capital": "",
         "states": [ "guatemala_state" ]
     },
     {
         "id": "belize",
         "name": "Belize",
-        "capital": "belmopan",
+        "capital": "",
         "states": [ "belize_state" ]
     },
     {
         "id": "el_salvador",
         "name": "El Salvador",
-        "capital": "san_salvador",
+        "capital": "",
         "states": [ "el_salvador_state" ]
     },
     {
         "id": "honduras",
         "name": "Honduras",
-        "capital": "tegucigalpa",
+        "capital": "",
         "states": [ "honduras_state" ]
     }
 ]

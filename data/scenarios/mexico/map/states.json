@@ -52,14 +52,14 @@
         "id": "sinaloa",
         "name": "Sinaloa",
         "color": "#8b0000",
-        "capital": "culiacan_rosales",
+        "capital": "culiacan",
         "fertilities": []
     },
     {
         "id": "durango",
         "name": "Durango",
         "color": "#808000",
-        "capital": "victoria_de_durango",
+        "capital": "durango",
         "fertilities": []
     },
     {
@@ -227,35 +227,35 @@
         "id": "usa_state",
         "name": "United States of America",
         "color": "#ee82ee",
-        "capital": "washington_dc",
+        "capital": "",
         "fertilities": []
     },
     {
         "id": "guatemala_state",
         "name": "Guatemala",
         "color": "#ffe4c4",
-        "capital": "guatemala_city",
+        "capital": "",
         "fertilities": []
     },
     {
         "id": "belize_state",
         "name": "Belize",
         "color": "#4a8787",
-        "capital": "belmopan",
+        "capital": "",
         "fertilities": []
     },
     {
         "id": "el_salvador_state",
         "name": "El Salvador",
         "color": "#781c1c",
-        "capital": "san_salvador",
+        "capital": "",
         "fertilities": []
     },
     {
         "id": "honduras_state",
         "name": "Honduras",
         "color": "#ffb6c1",
-        "capital": "tegucigalpa",
+        "capital": "",
         "fertilities": []
     },
     {
