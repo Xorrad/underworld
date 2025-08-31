@@ -22,6 +22,11 @@ inline bool IsInstance(const SharedPtr<Base>& ptr) {
 }
 
 template <typename Derived, typename Base>
+inline bool IsInstance(Base ptr) {
+    return dynamic_cast<Derived>(ptr) != nullptr;
+}
+
+template <typename Derived, typename Base>
 inline SharedPtr<Derived> CastSharedPtr(const SharedPtr<Base>& ptr) {
 	return std::dynamic_pointer_cast<Derived>(ptr);
 }
