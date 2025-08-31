@@ -2,6 +2,7 @@
 #include "doctest/doctest.hpp"
 
 #include "tests/DevTests.hpp"
+#include "tests/DateTests.hpp"
 
 int main(int argc, char** argv) {
     doctest::Context context(argc, argv);
