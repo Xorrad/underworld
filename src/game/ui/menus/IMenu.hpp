@@ -7,7 +7,7 @@ public:
     IMenu(Game* game, IState* state) : m_Game(game), m_State(state) {}
     virtual ~IMenu() {}
 
-    virtual void Update(bool skipInput = false) = 0;
+    virtual void Update(char32_t key, bool skipInput = false) = 0;
     virtual void Render() = 0;
 
 protected:

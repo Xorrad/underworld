@@ -24,7 +24,8 @@ void IState::PopMenu() {
 void IState::Update() {
     if (m_Menus.empty())
         return;
-    m_Menus.top()->Update(m_FirstFrame);
+    char32_t key = (m_FirstFrame ? 0 : tuim::PollKeyCode());
+    m_Menus.top()->Update(key, m_FirstFrame);
 }
 
 void IState::Render() {

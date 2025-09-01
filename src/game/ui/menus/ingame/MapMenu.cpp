@@ -9,8 +9,8 @@
 
 UI::MapMenu::MapMenu(Game* game, IState* state) : IMenu(game, state) {}
 
-void UI::MapMenu::Update(bool skipInput) {
-    tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));
+void UI::MapMenu::Update(char32_t key, bool skipInput) {
+    tuim::Update(key);
 
     InGameState* state = static_cast<InGameState*>(m_State);
     if (tuim::IsKeyPressed(tuim::BACKSPACE)) {

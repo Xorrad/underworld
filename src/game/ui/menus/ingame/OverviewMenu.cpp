@@ -8,8 +8,8 @@
 
 UI::OverviewMenu::OverviewMenu(Game* game, IState* state) : IMenu(game, state) {}
 
-void UI::OverviewMenu::Update(bool skipInput) {
-    tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));
+void UI::OverviewMenu::Update(char32_t key, bool skipInput) {
+    tuim::Update(key);
 
     if (tuim::IsKeyPressed(tuim::BACKSPACE)) {
         dynamic_cast<InGameState*>(m_State)->SetExitToHomeMenu(true);

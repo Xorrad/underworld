@@ -77,12 +77,13 @@ void InGameState::UpdateWorld() {
 }
 
 void InGameState::Update() {
+    if (m_Menus.empty())
+        return;
+
+    char32_t key = (m_FirstFrame ? 0 : tuim::PollKeyCode());
     {
         std::lock_guard<std::mutex> lock(m_World->GetMutex());
-
-        if (m_Menus.empty())
-            return;
-        m_Menus.top()->Update(m_FirstFrame);
+        m_Menus.top()->Update(key, m_FirstFrame);
 
         if (tuim::GetCtx()->m_ActiveItemId == 0) {
             if (tuim::IsKeyPressed(tuim::SPACE)) m_Paused = !m_Paused;
@@ -97,20 +98,23 @@ void InGameState::Update() {
 }
 
 void InGameState::Render() {
-    {
-        // std::lock_guard<std::mutex> lock(m_World->GetMutex());
 
-        if (m_Menus.empty())
-            return;
-        
-        // The first frame need to be rendered and then updated in order for
-        // tuim to map out the items in the frame and which are hovered.
-        if (m_FirstFrame) {
+    if (m_Menus.empty())
+        return;
+    
+    // The first frame need to be rendered and then updated in order for
+    // tuim to map out the items in the frame and which are hovered.
+    if (m_FirstFrame) {
+        {
+            std::lock_guard<std::mutex> lock(m_World->GetMutex());
             m_Menus.top()->Render();
-            this->Update();
         }
-        m_FirstFrame = false;
+        this->Update();
+    }
+    m_FirstFrame = false;
 
+    {
+        std::lock_guard<std::mutex> lock(m_World->GetMutex());
         m_Menus.top()->Render();
     }
 

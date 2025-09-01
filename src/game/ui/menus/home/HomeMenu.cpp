@@ -7,8 +7,8 @@
 
 UI::HomeMenu::HomeMenu(Game* game, IState* state) : IMenu(game, state) {}
 
-void UI::HomeMenu::Update(bool skipInput) {
-    tuim::Update((skipInput ? 0 : tuim::PollKeyCode()));
+void UI::HomeMenu::Update(char32_t key, bool skipInput) {
+    tuim::Update(key);
 
     if (tuim::IsKeyPressed(tuim::BACKSPACE))
         m_Game->SetRunning(false);
