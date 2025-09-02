@@ -1,0 +1,23 @@
+[
+    {
+        "id": "coca_leaf",
+        "name": "Cocaine",
+        "weight": 100.0,
+        "volume": 1000000.0,
+        "base_price": 20000.0
+    },
+    {
+        "id": "cocaine_powder",
+        "name": "Cocaine",
+        "weight": 1.0,
+        "volume": 1210.0,
+        "base_price": 20000.0
+    },
+    {
+        "id": "assault_rifle",
+        "name": "Assault Rifle",
+        "weight": 3.5,
+        "volume": 16000,
+        "base_price": 800.0
+    }
+]
