@@ -1,7 +1,6 @@
 #include "MapMenu.hpp"
 #include "game/Game.hpp"
-#include "game/core/world/World.hpp"
-#include "game/core/world/City.hpp"
+#include "game/core/Includes.hpp"
 #include "game/states/InGameState.hpp"
 #include "game/ui/components/Components.hpp"
 

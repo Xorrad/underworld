@@ -1,0 +1,6 @@
+#include "game/core/world/World.hpp"
+#include "game/core/world/Scenario.hpp"
+#include "game/core/world/Country.hpp"
+#include "game/core/world/State.hpp"
+#include "game/core/world/City.hpp"
+#include "game/core/items/Item.hpp"

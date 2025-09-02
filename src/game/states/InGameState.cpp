@@ -1,10 +1,6 @@
 #include "InGameState.hpp"
 #include "game/Game.hpp"
-#include "game/core/world/World.hpp"
-#include "game/core/world/Scenario.hpp"
-#include "game/core/world/Country.hpp"
-#include "game/core/world/State.hpp"
-#include "game/core/world/City.hpp"
+#include "game/core/Includes.hpp"
 #include "game/states/HomeState.hpp"
 #include "game/ui/menus/ingame/OverviewMenu.hpp"
 

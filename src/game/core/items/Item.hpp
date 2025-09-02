@@ -2,14 +2,13 @@
 
 class Item {
 public:
-    Item(const std::string& id, const std::string& name, double weight, double volume, double basePrice)
-        : m_Id(id), m_Name(name), m_Weight(weight), m_Volume(volume), m_BasePrice(basePrice) {}
+    Item(const std::string& id, const std::string& name, double weight, double volume, double basePrice);
 
-    const std::string& GetId() const { return m_Id; }
-    const std::string& GetName() const { return m_Name; }
-    double GetWeight() const { return m_Weight; }
-    double GetVolume() const { return m_Volume; }
-    double GetBasePrice() const { return m_BasePrice; }
+    const std::string& GetId() const;
+    const std::string& GetName() const;
+    double GetWeight() const;
+    double GetVolume() const;
+    double GetBasePrice() const;
 
 private:
     std::string m_Id;
