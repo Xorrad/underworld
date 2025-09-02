@@ -36,6 +36,8 @@ public:
     void AddCity(UniquePtr<City> city);
     void RemoveCity(City* city);
     void RemoveCity(std::string id);
+    
+    void AddItem(UniquePtr<Item> item);
 
     void SetStatesImage(UniquePtr<Image> statesImage);
     void SetTerrainImage(UniquePtr<Image> terrainImage);
@@ -55,6 +57,8 @@ private:
     std::unordered_map<std::string, UniquePtr<Country>> m_Countries;
     std::unordered_map<std::string, UniquePtr<City>> m_Cities;
     std::unordered_map<Vec2<int>, City*> m_CitiesByPosition;
+
+    std::unordered_map<std::string, UniquePtr<Item>> m_Items;
 
     UniquePtr<Image> m_StatesImage;
     UniquePtr<Image> m_TerrainImage;

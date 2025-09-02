@@ -4,6 +4,7 @@
 #include "game/core/world/State.hpp"
 #include "game/core/world/Country.hpp"
 #include "game/core/world/City.hpp"
+#include "game/core/items/Item.hpp"
 
 World::World() {}
 
@@ -113,6 +114,10 @@ void World::RemoveCity(City* city) {
 void World::RemoveCity(std::string id) {
     m_CitiesByPosition.erase(m_Cities[id]->GetPosition());
     m_Cities.erase(id);
+}
+
+void World::AddItem(UniquePtr<Item> item) {
+    m_Items[item->GetId()] = std::move(item);
 }
 
 void World::SetStatesImage(UniquePtr<Image> statesImage) {

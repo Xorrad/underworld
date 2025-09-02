@@ -20,13 +20,13 @@ void Configuration::Load() {
     nlohmann::json data = nlohmann::json::parse(file);
     file.close();
 
-    Configuration::debugMode = data.value("debugMode", false);
+    Configuration::debugMode = data.value("debug_mode", false);
 }
 
 void Configuration::Save() {
     // Build a json object with all settings to save.
     nlohmann::json json;
-    json["debugMode"] = Configuration::debugMode;
+    json["debug_mode"] = Configuration::debugMode;
 
     // Dump that json object into the settings file.
     std::ofstream file(Configuration::dataPath + "/" + Configuration::settingsFile, std::ios::out);

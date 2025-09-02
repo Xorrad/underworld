@@ -31,6 +31,8 @@ class World;
 class Country;
 class State;
 class City;
+class Item;
+class ItemStack;
 
 namespace UI {
     class IMenu;

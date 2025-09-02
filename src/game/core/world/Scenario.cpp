@@ -58,6 +58,7 @@ std::vector<UniquePtr<Scenario>> Scenario::ListScenarios() {
 void Scenario::Load(World* world) {
     try {
         this->LoadDefines(world);
+        this->LoadItems(world);
         this->LoadCities(world);
         this->LoadStates(world);
         this->LoadCountries(world);
@@ -83,6 +84,26 @@ void Scenario::LoadDefines(World* world) {
 
     // Store all defines to allow accessing them anytime.
     world->SetDefines(std::move(data));
+}
+
+void Scenario::LoadItems(World* world) {
+    std::string filePath = m_DirPath + "/items/items.json";
+    std::ifstream file(filePath, std::ios::binary);
+    if (!file) return;
+    
+    nlohmann::json data = nlohmann::json::parse(file);
+    for(auto itemData : data) {
+        UniquePtr<Item> city = MakeUnique<Item>(
+            itemData["id"],
+            itemData["name"],
+            itemData["weight"],
+            itemData["volume"],
+            itemData["base_price"]
+        );
+        world->AddItem(std::move(city));
+    }
+
+    file.close();
 }
 
 void Scenario::LoadCities(World* world) {

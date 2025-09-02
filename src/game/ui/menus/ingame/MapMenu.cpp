@@ -103,8 +103,9 @@ void UI::MapMenu::Render() {
             }
             if (city->GetPosition().y > origin.y) {
                 int x = 2*(city->GetPosition().x - origin.x) - (int)(tuim::CalcTextWidth(city->GetName())/2)+1;
+                std::string cityName = (x < 0 ? city->GetName().substr(-x) : city->GetName());
                 tuim::SetCurrentCursor({std::max(0, x), city->GetPosition().y - 1 - origin.y});
-                tuim::Print("#_ffffff#000000{}&r", (x < 0 ? city->GetName().substr(-x) : city->GetName()));
+                tuim::Print("#_ffffff#000000{}&r", cityName);
             }
         }
 
