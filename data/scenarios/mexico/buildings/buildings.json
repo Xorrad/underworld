@@ -1,0 +1,28 @@
+[
+    {
+        "id": "coca_farm",
+        "name": "Coca Plantation",
+        "price": 10000,
+        "employees": 10,
+        "type": "production",
+        "duration": 90,
+        "input": {},
+        "output": {
+            "coca_leaves": 1
+        }
+    },
+    {
+        "id": "cocaine_lab",
+        "name": "Cocaine Lab",
+        "price": 150000,
+        "employees": 10,
+        "type": "production",
+        "duration": 10,
+        "input": {
+            "coca_leaves": 3
+        },
+        "output": {
+            "cocaine_powder": 1
+        }
+    }
+]
