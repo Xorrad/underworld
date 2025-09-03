@@ -33,6 +33,9 @@ class State;
 class City;
 class Item;
 class ItemStack;
+class ProductionChain;
+class BuildingType;
+class Building;
 
 namespace UI {
     class IMenu;
@@ -50,3 +53,4 @@ namespace UI {
 #include "util/Date.hpp"
 #include "game/core/Configuration.hpp"
 #include "game/ui/Defines.hpp"
+#include "game/core/buildings/BuildingTypes.hpp"

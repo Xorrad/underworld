@@ -56,6 +56,7 @@ void Scenario::Load(World* world) {
     try {
         this->LoadDefines(world);
         this->LoadItems(world);
+        this->LoadBuildingTypes(world);
         this->LoadCities(world);
         this->LoadStates(world);
         this->LoadCountries(world);
@@ -101,6 +102,10 @@ void Scenario::LoadItems(World* world) {
     }
 
     file.close();
+}
+
+void Scenario::LoadBuildingTypes(World* world) {
+    
 }
 
 void Scenario::LoadCities(World* world) {

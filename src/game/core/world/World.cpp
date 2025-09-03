@@ -49,6 +49,10 @@ City* World::GetCity(Vec2<int> position) {
     return it->second;
 }
 
+std::unordered_map<std::string, UniquePtr<Item>>& World::GetItems() {
+    return m_Items;
+}
+
 Image* World::GetStatesImage() {
     return m_StatesImage.get();
 }

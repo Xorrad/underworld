@@ -14,6 +14,7 @@ public:
     std::unordered_map<std::string, UniquePtr<Country>>& GetCountries();
     std::unordered_map<std::string, UniquePtr<City>>& GetCities();
     City* GetCity(Vec2<int> position);
+    std::unordered_map<std::string, UniquePtr<Item>>& GetItems();
     
     Image* GetStatesImage();
     Image* GetTerrainImage();
