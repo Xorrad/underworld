@@ -5,8 +5,8 @@ BuildingType::BuildingType(const std::string& id, const std::string& name, int p
     m_Id(id),
     m_Name(name),
     m_Price(price),
-    m_Type(type),
     m_Employees(employees),
+    m_Type(type),
     m_ProductionChain(std::move(productionChain))
 {}
 
@@ -14,8 +14,8 @@ BuildingType::BuildingType(const BuildingType& other) :
     m_Id(other.m_Id),
     m_Name(other.m_Name),
     m_Price(other.m_Price),
-    m_Type(other.m_Type),
     m_Employees(other.m_Employees),
+    m_Type(other.m_Type),
     m_ProductionChain(other.m_ProductionChain ? MakeUnique<ProductionChain>(*other.m_ProductionChain) : nullptr)
 {}
 
@@ -24,57 +24,57 @@ BuildingType& BuildingType::operator=(const BuildingType& other) {
         m_Id = other.m_Id;
         m_Name = other.m_Name;
         m_Price = other.m_Price;
-        m_Type = other.m_Type;
         m_Employees = other.m_Employees;
+        m_Type = other.m_Type;
         m_ProductionChain = other.m_ProductionChain ? MakeUnique<ProductionChain>(*other.m_ProductionChain) : nullptr;
     }
     return *this;
 }
 
-const std::string& BuildingType::getId() const {
+const std::string& BuildingType::GetId() const {
     return m_Id;
 }
 
-const std::string& BuildingType::getName() const {
+const std::string& BuildingType::GetName() const {
     return m_Name;
 }
 
-int BuildingType::getPrice() const {
+int BuildingType::GetPrice() const {
     return m_Price;
 }
 
-BuildingTypes BuildingType::getType() const {
+BuildingTypes BuildingType::GetType() const {
     return m_Type;
 }
 
-int BuildingType::getEmployees() const {
+int BuildingType::GetEmployees() const {
     return m_Employees;
 }
 
-ProductionChain* BuildingType::getProductionChain() {
+ProductionChain* BuildingType::GetProductionChain() {
     return m_ProductionChain.get();
 }
 
-void BuildingType::setId(const std::string& id) {
+void BuildingType::SetId(const std::string& id) {
     m_Id = id;
 }
 
-void BuildingType::setName(const std::string& name) {
+void BuildingType::SetName(const std::string& name) {
     m_Name = name;
 }
 
-void BuildingType::setPrice(int price) {
+void BuildingType::SetPrice(int price) {
     m_Price = price;
 }
 
-void BuildingType::setType(BuildingTypes type) {
+void BuildingType::SetType(BuildingTypes type) {
     m_Type = type;
 }
 
-void BuildingType::setEmployees(int employees) {
+void BuildingType::SetEmployees(int employees) {
     m_Employees = employees;
 }
 
-void BuildingType::setProductionChain(UniquePtr<ProductionChain> productionChain) {
+void BuildingType::SetProductionChain(UniquePtr<ProductionChain> productionChain) {
     m_ProductionChain = std::move(productionChain);
 }

@@ -1,10 +1,6 @@
 #include "World.hpp"
 #include "game/states/InGameState.hpp"
-#include "game/core/world/Scenario.hpp"
-#include "game/core/world/State.hpp"
-#include "game/core/world/Country.hpp"
-#include "game/core/world/City.hpp"
-#include "game/core/items/Item.hpp"
+#include "game/core/Includes.hpp"
 
 World::World() {}
 
@@ -51,6 +47,10 @@ City* World::GetCity(Vec2<int> position) {
 
 std::unordered_map<std::string, UniquePtr<Item>>& World::GetItems() {
     return m_Items;
+}
+
+std::unordered_map<std::string, UniquePtr<BuildingType>>& World::GetBuildingTypes() {
+    return m_BuildingTypes;
 }
 
 Image* World::GetStatesImage() {
@@ -122,6 +122,10 @@ void World::RemoveCity(std::string id) {
 
 void World::AddItem(UniquePtr<Item> item) {
     m_Items[item->GetId()] = std::move(item);
+}
+
+void World::AddBuildingType(UniquePtr<BuildingType> buildingType) {
+    m_BuildingTypes[buildingType->GetId()] = std::move(buildingType);
 }
 
 void World::SetStatesImage(UniquePtr<Image> statesImage) {

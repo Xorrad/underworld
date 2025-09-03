@@ -15,6 +15,7 @@ public:
     std::unordered_map<std::string, UniquePtr<City>>& GetCities();
     City* GetCity(Vec2<int> position);
     std::unordered_map<std::string, UniquePtr<Item>>& GetItems();
+    std::unordered_map<std::string, UniquePtr<BuildingType>>& GetBuildingTypes();
     
     Image* GetStatesImage();
     Image* GetTerrainImage();
@@ -40,6 +41,8 @@ public:
     
     void AddItem(UniquePtr<Item> item);
 
+    void AddBuildingType(UniquePtr<BuildingType> buildingType);
+
     void SetStatesImage(UniquePtr<Image> statesImage);
     void SetTerrainImage(UniquePtr<Image> terrainImage);
     void SetTerrain(std::vector<std::vector<std::string>> terrain);
@@ -60,6 +63,7 @@ private:
     std::unordered_map<Vec2<int>, City*> m_CitiesByPosition;
 
     std::unordered_map<std::string, UniquePtr<Item>> m_Items;
+    std::unordered_map<std::string, UniquePtr<BuildingType>> m_BuildingTypes;
 
     UniquePtr<Image> m_StatesImage;
     UniquePtr<Image> m_TerrainImage;

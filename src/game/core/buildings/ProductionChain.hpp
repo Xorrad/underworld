@@ -9,15 +9,15 @@ public:
 
     ProductionChain& operator=(const ProductionChain& other);
 
-    int getDuration() const;
-    const Date& getStart() const;
-    const std::unordered_map<Item*, int>& getInputs() const;
-    const std::unordered_map<Item*, int>& getOutputs() const;
+    int GetDuration() const;
+    const Date& GetStart() const;
+    const std::unordered_map<Item*, int>& GetInputs() const;
+    const std::unordered_map<Item*, int>& GetOutputs() const;
 
-    void setDuration(int duration);
-    void setStart(const Date& start);
-    void setInputs(const std::unordered_map<Item*, int>& inputs);
-    void setOutputs(const std::unordered_map<Item*, int>& outputs);
+    void SetDuration(int duration);
+    void SetStart(const Date& start);
+    void SetInputs(const std::unordered_map<Item*, int>& inputs);
+    void SetOutputs(const std::unordered_map<Item*, int>& outputs);
 
     static UniquePtr<ProductionChain> FromJson(World* world, const nlohmann::json& json);
 

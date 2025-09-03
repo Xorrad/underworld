@@ -26,35 +26,35 @@ ProductionChain& ProductionChain::operator=(const ProductionChain& other) {
     return *this;
 }
 
-int ProductionChain::getDuration() const {
+int ProductionChain::GetDuration() const {
     return m_Duration;
 }
 
-const Date& ProductionChain::getStart() const {
+const Date& ProductionChain::GetStart() const {
     return m_Start;
 }
 
-const std::unordered_map<Item*, int>& ProductionChain::getInputs() const {
+const std::unordered_map<Item*, int>& ProductionChain::GetInputs() const {
     return m_Inputs;
 }
 
-const std::unordered_map<Item*, int>& ProductionChain::getOutputs() const {
+const std::unordered_map<Item*, int>& ProductionChain::GetOutputs() const {
     return m_Outputs;
 }
 
-void ProductionChain::setDuration(int duration) {
+void ProductionChain::SetDuration(int duration) {
     m_Duration = duration;
 }
 
-void ProductionChain::setStart(const Date& start) {
+void ProductionChain::SetStart(const Date& start) {
     m_Start = start;
 }
 
-void ProductionChain::setInputs(const std::unordered_map<Item*, int>& inputs) {
+void ProductionChain::SetInputs(const std::unordered_map<Item*, int>& inputs) {
     m_Inputs = inputs;
 }
 
-void ProductionChain::setOutputs(const std::unordered_map<Item*, int>& outputs) {
+void ProductionChain::SetOutputs(const std::unordered_map<Item*, int>& outputs) {
     m_Outputs = outputs;
 }
 

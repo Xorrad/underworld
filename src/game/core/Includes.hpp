@@ -4,3 +4,5 @@
 #include "game/core/world/State.hpp"
 #include "game/core/world/City.hpp"
 #include "game/core/items/Item.hpp"
+#include "game/core/buildings/BuildingType.hpp"
+#include "game/core/buildings/ProductionChain.hpp"

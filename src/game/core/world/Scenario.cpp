@@ -105,7 +105,27 @@ void Scenario::LoadItems(World* world) {
 }
 
 void Scenario::LoadBuildingTypes(World* world) {
+    std::string filePath = m_DirPath + "/buildings/buildings.json";
+    std::ifstream file(filePath, std::ios::binary);
+    if (!file) return;
     
+    nlohmann::json data = nlohmann::json::parse(file);
+    for(auto buildingData : data) {
+        // TODO: check building type.
+        UniquePtr<ProductionChain> productionChain = ProductionChain::FromJson(world, buildingData);
+
+        UniquePtr<BuildingType> buildingType = MakeUnique<BuildingType>(
+            buildingData["id"],
+            buildingData["name"],
+            buildingData["price"],
+            buildingData["employees"],
+            BuildingTypes::PRODUCTION,
+            std::move(productionChain)
+        );
+        world->AddBuildingType(std::move(buildingType));
+    }
+
+    file.close();
 }
 
 void Scenario::LoadCities(World* world) {
