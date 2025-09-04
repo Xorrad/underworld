@@ -2,6 +2,7 @@
     {
         "id": "coca_farm",
         "name": "Coca Plantation",
+        "icon": "ᚊ",
         "price": 10000,
         "employees": 10,
         "type": "production",
@@ -14,6 +15,7 @@
     {
         "id": "cocaine_lab",
         "name": "Cocaine Lab",
+        "icon": "⟰",
         "price": 150000,
         "employees": 10,
         "type": "production",

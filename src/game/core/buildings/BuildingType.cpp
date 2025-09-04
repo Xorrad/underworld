@@ -1,9 +1,10 @@
 #include "BuildingType.hpp"
 #include "ProductionChain.hpp"
 
-BuildingType::BuildingType(const std::string& id, const std::string& name, int price, int employees, BuildingTypes type, UniquePtr<ProductionChain> productionChain) :
+BuildingType::BuildingType(const std::string& id, const std::string& name, const std::string& icon, int price, int employees, BuildingTypes type, UniquePtr<ProductionChain> productionChain) :
     m_Id(id),
     m_Name(name),
+    m_Icon(icon),
     m_Price(price),
     m_Employees(employees),
     m_Type(type),
@@ -13,6 +14,7 @@ BuildingType::BuildingType(const std::string& id, const std::string& name, int p
 BuildingType::BuildingType(const BuildingType& other) :
     m_Id(other.m_Id),
     m_Name(other.m_Name),
+    m_Icon(other.m_Icon),
     m_Price(other.m_Price),
     m_Employees(other.m_Employees),
     m_Type(other.m_Type),
@@ -23,6 +25,7 @@ BuildingType& BuildingType::operator=(const BuildingType& other) {
     if (this != &other) {
         m_Id = other.m_Id;
         m_Name = other.m_Name;
+        m_Icon = other.m_Icon;
         m_Price = other.m_Price;
         m_Employees = other.m_Employees;
         m_Type = other.m_Type;
@@ -37,6 +40,10 @@ const std::string& BuildingType::GetId() const {
 
 const std::string& BuildingType::GetName() const {
     return m_Name;
+}
+
+const std::string& BuildingType::GetIcon() const {
+    return m_Icon;
 }
 
 int BuildingType::GetPrice() const {
@@ -61,6 +68,10 @@ void BuildingType::SetId(const std::string& id) {
 
 void BuildingType::SetName(const std::string& name) {
     m_Name = name;
+}
+
+void BuildingType::SetIcon(const std::string& icon) {
+    m_Icon = icon;
 }
 
 void BuildingType::SetPrice(int price) {

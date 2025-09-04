@@ -72,15 +72,24 @@ void UI::MapMenu::Render() {
         };
         Vec2<int> end = { origin.x + mapSize.x, origin.y + mapSize.y };
 
-        for (uint32_t y = origin.y; y < end.y; y++) {
-            for (uint32_t x = origin.x; x < end.x; x++) {
+        auto& buildings = world->GetBuildings();
+
+        for (int y = origin.y; y < end.y; y++) {
+            for (int x = origin.x; x < end.x; x++) {
                 uint32_t index = y * terrainImage->GetWidth() + x;
-                if (previousColor != terrainPixels[index]) {
-                    previousColor = terrainPixels[index];
-                    tuim::Print("#_" + previousColor.ToHex());
+
+                auto it = buildings.find({x, y});
+                if (it != buildings.end()) {
+                    tuim::Print("#_666666{} &r", it->second->GetType()->GetIcon());
                 }
-                tuim::Print("  ");
-                // tuim::Print("{}{}", terrainCharacters[y][2*x], terrainCharacters[y][2*x+1]);
+                else {
+                    if (previousColor != terrainPixels[index]) {
+                        previousColor = terrainPixels[index];
+                        tuim::Print("#_" + previousColor.ToHex());
+                    }
+                    tuim::Print("  ");
+                    // tuim::Print("{}{}", terrainCharacters[y][2*x], terrainCharacters[y][2*x+1]);
+                }
             }
             tuim::Print("\n");
         }
@@ -130,7 +139,18 @@ void UI::MapMenu::Render() {
     tuim::BeginContainer("#container-sidebar", "", {sidebarWidth+1, terminalSize.y-UI::HEADER_HEIGHT-titleHeight+2});
     
     tuim::Print("\t");
-    if (tuim::HomeMenuButton("#button-buildings", "Buildings"));
+    if (tuim::HomeMenuButton("#button-coca-farm", "Coca Farm"))
+        world->AddBuilding(MakeUnique<Building>(
+            world->GetBuildingTypes()["coca_farm"].get(),
+            state->GetCursor()
+        ));
+        
+    tuim::Print("\n\t");    
+    if (tuim::HomeMenuButton("#button-cocaine-lab", "Cocaine Lab"))
+        world->AddBuilding(MakeUnique<Building>(
+            world->GetBuildingTypes()["cocaine_lab"].get(),
+            state->GetCursor()
+        ));
 
     tuim::Print("\n\t");
     if (tuim::HomeMenuButton("#button-intrigue", "Intrigue"));

@@ -117,6 +117,7 @@ void Scenario::LoadBuildingTypes(World* world) {
         UniquePtr<BuildingType> buildingType = MakeUnique<BuildingType>(
             buildingData["id"],
             buildingData["name"],
+            buildingData["icon"],
             buildingData["price"],
             buildingData["employees"],
             BuildingTypes::PRODUCTION,
