@@ -53,6 +53,10 @@ std::unordered_map<std::string, UniquePtr<BuildingType>>& World::GetBuildingType
     return m_BuildingTypes;
 }
 
+std::unordered_map<Vec2<int>, UniquePtr<Building>>& World::GetBuildings() {
+    return m_Buildings;
+}
+
 Image* World::GetStatesImage() {
     return m_StatesImage.get();
 }
@@ -126,6 +130,10 @@ void World::AddItem(UniquePtr<Item> item) {
 
 void World::AddBuildingType(UniquePtr<BuildingType> buildingType) {
     m_BuildingTypes[buildingType->GetId()] = std::move(buildingType);
+}
+
+void World::AddBuilding(UniquePtr<Building> building) {
+    m_Buildings[building->GetPosition()] = std::move(building);
 }
 
 void World::SetStatesImage(UniquePtr<Image> statesImage) {

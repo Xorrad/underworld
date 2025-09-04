@@ -6,3 +6,4 @@
 #include "game/core/items/Item.hpp"
 #include "game/core/buildings/BuildingType.hpp"
 #include "game/core/buildings/ProductionChain.hpp"
+#include "game/core/buildings/Building.hpp"
