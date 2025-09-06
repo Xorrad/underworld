@@ -13,6 +13,7 @@
 #include <atomic> // std::atomic
 #include <condition_variable> // std::condition_variable
 #include <chrono> // std::chrono
+#include <locale> // std::locale
 #include <tuim/tuim.hpp>
 
 #include "util/SignalHandler.hpp"

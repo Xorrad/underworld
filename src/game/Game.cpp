@@ -44,6 +44,8 @@ void Game::Init(int argc, char* argv[]) {
     tuim::DefineStyle('n', tuim::Style::REVERSE);
     tuim::DefineStyle('h', tuim::Style::HIDDEN);
     tuim::DefineStyle('s', tuim::Style::STRIKETHROUGH);
+
+    std::locale::global(std::locale("en_US.UTF-8"));
 }
 
 void Game::Run() {

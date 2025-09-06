@@ -126,52 +126,129 @@ void UI::MapMenu::Render() {
     }
     tuim::EndContainer();
 
-    int titleHeight = 5;
+    // Store data that are going to be neccessary for the sidebar.
+    City* tileCity = world->GetCity(cursor);
+    Building* tileBuilding = world->GetBuilding(cursor);
+
+    std::string tileTitle = (
+        tileCity != nullptr ? tileCity->GetName() :
+        tileBuilding  != nullptr ? tileBuilding->GetType()->GetName() :
+        "Empty Tile"
+    );
+    std::string tileType = (
+        tileCity != nullptr ? "City" :
+        tileBuilding  != nullptr ? BuildingTypesLabels[(int) tileBuilding->GetType()->GetType()] :
+        ""
+    );
+
+    int titleHeight = 4;
     int sidebarWidth = terminalSize.x - mapSize.x;
     tuim::SetCurrentCursor({0, UI::HEADER_HEIGHT-1});
     tuim::BeginContainer("#container-title", "", {sidebarWidth+1, titleHeight}, tuim::CONTAINER_FLAGS_NONE, tuim::ALIGN_CENTER);
-    tuim::BeginContainer("#container-title-inner", "", {(int) tuim::CalcTextWidth("Empty Desert"), titleHeight}, tuim::CONTAINER_FLAGS_BORDERLESS);
-    tuim::Print("\nEmpty Desert");
+    tuim::BeginContainer("#container-title-inner", "", {(int) tuim::CalcTextWidth(tileTitle), 2}, tuim::CONTAINER_FLAGS_BORDERLESS);
+    tuim::Print("&b{}&r\n", tileTitle);
+    tuim::EndContainer();
+    tuim::BeginContainer("#container-type-inner", "", {(int) tuim::CalcTextWidth(tileType), 1}, tuim::CONTAINER_FLAGS_BORDERLESS);
+    tuim::Print("#666666{}&r", tileType);
     tuim::EndContainer();
     tuim::EndContainer();
 
     tuim::SetCurrentCursor({0, UI::HEADER_HEIGHT+titleHeight-2});
     tuim::BeginContainer("#container-sidebar", "", {sidebarWidth+1, terminalSize.y-UI::HEADER_HEIGHT-titleHeight+2});
     
-    tuim::Print("\t");
-    if (tuim::HomeMenuButton("#button-coca-farm", "Coca Farm"))
-        world->AddBuilding(MakeUnique<Building>(
-            world->GetBuildingTypes()["coca_farm"].get(),
-            state->GetCursor()
-        ));
+    
+    static bool showTileInfo = true;
+    static bool showProduction = false;
+    static bool showActions = false;
+    static bool showStockpile = false;
+
+    if (tuim::HomeMenuButton("#button-show-info", "&bInformation&r")) showTileInfo = !showTileInfo;
+    if (showTileInfo) {
+        tuim::Print("\n\n");
+
+        tuim::SetCurrentCursor({2, tuim::GetCurrentCursor().y});
+        tuim::BeginContainer("#container-sidebar-info", "", {sidebarWidth-3, 10}, tuim::CONTAINER_FLAGS_BORDERLESS);
+
+        if (tileCity != nullptr) {
+            tuim::Print("Name: {}\n", tileTitle);
+            tuim::Print("Type: {}\n", tileType);
+            tuim::Print("Population: {:L}\n", tileCity->GetPopulation());
+        }
+        else if (tileBuilding != nullptr) {
+            tuim::Print("Owner: {}\n\n", "Cartel X");
+            tuim::Print("Name: {}\n", tileTitle);
+            tuim::Print("Type: {}\n", tileType);
+            tuim::Print("Level: {}\n", 1);
+            tuim::Print("Value: ${:L}\n", 1*tileBuilding->GetType()->GetPrice());
+            tuim::Print("Employees: {:L}/{:L}\n", 0, tileBuilding->GetType()->GetEmployees());
+            tuim::Print("Productivity: #aa0000{}%&r\n", 0);
+        }
+        tuim::EndContainer();
+    }
+    tuim::Print("\n");
+
+    if (tileBuilding != nullptr && tileBuilding->GetType()->GetType() == BuildingTypes::PRODUCTION) {
+        if (tuim::HomeMenuButton("#button-show-production", "&bProduction&r")) showProduction = !showProduction;
+        if (showProduction) {
+            tuim::Print("\n\n");
+
+            tuim::SetCurrentCursor({2, tuim::GetCurrentCursor().y});
+            tuim::BeginContainer("#container-sidebar-production", "", {sidebarWidth-3, 10}, tuim::CONTAINER_FLAGS_BORDERLESS);
+
+            ProductionChain* productionChain = tileBuilding->GetType()->GetProductionChain();
+            for (auto& [input, quantity] : productionChain->GetInputs()) {
+                tuim::Print("#aa0000{}x {}&r\n", quantity, input->GetName());
+            }
+            if (productionChain->GetInputs().empty()) tuim::Print("Nothing\n");
+            tuim::Print("\t⇓\n");
+            for (auto& [output, quantity] : productionChain->GetOutputs()) {
+                tuim::Print("#aaaaaa{}x {}&r\n", quantity, output->GetName());
+            }
+            if (productionChain->GetOutputs().empty()) tuim::Print("Nothing\n");
+
+            int remainingDays = ((productionChain->GetStart() + productionChain->GetDuration()) - world->GetDate());
+            tuim::Print("\nTime Left: {} days\n", (remainingDays < 0 ? "N/A" : std::to_string(remainingDays)));
+
+            tuim::EndContainer();
+        }
+        tuim::Print("\n");
+    }
+    
+    if (tuim::HomeMenuButton("#button-show-stockpile", "&bStockpile&r")) showStockpile = !showStockpile;
+    tuim::Print("\n");
+    
+    if (tuim::HomeMenuButton("#button-show-actions", "&bActions&r")) showActions = !showActions;
+    if (showActions) {
+        tuim::Print("\n\n");
+        tuim::SetCurrentCursor({2, tuim::GetCurrentCursor().y});
+        tuim::BeginContainer("#container-sidebar-actions", "", {sidebarWidth-3, 5}, tuim::CONTAINER_FLAGS_BORDERLESS);
         
-    tuim::Print("\n\t");    
-    if (tuim::HomeMenuButton("#button-cocaine-lab", "Cocaine Lab"))
-        world->AddBuilding(MakeUnique<Building>(
-            world->GetBuildingTypes()["cocaine_lab"].get(),
-            state->GetCursor()
-        ));
+        if (tileCity == nullptr && tileBuilding == nullptr) {
+            static size_t buildingIndex = 0;
+            std::vector<std::string> buildingTypes;
+            for (auto& [id, _] : world->GetBuildingTypes()) buildingTypes.push_back(id);
+            tuim::EnumInput("input-create-building", "Construct a < {} > building", &buildingIndex, buildingTypes);
+            if (tuim::IsItemHovered() && tuim::IsKeyPressed(tuim::ENTER)) {
+                BuildingType* type = world->GetBuildingTypes()[buildingTypes[buildingIndex]].get();
+                world->AddBuilding(MakeUnique<Building>(
+                    type,
+                    state->GetCursor()
+                ));
+            }
+            tuim::Print("\n");
+        }
+        else if (tileBuilding != nullptr) {
+            if (tuim::HomeMenuButton("#button-destroy-building", fmt::format("Destroy {}", tileTitle)))
+                world->RemoveBuilding(state->GetCursor());
+            tuim::Print("\n");
+        }
 
-    tuim::Print("\n\t");
-    if (tuim::HomeMenuButton("#button-intrigue", "Intrigue"));
-    
-    tuim::Print("\n\t");
-    if (tuim::HomeMenuButton("#button-members", "Members"));
-    
-    tuim::Print("\n\t");
-    if (tuim::HomeMenuButton("#button-finances", "Finances"));
-    
-    tuim::Print("\n\t");
-    if (tuim::HomeMenuButton("#button-diplomacy", "Diplomacy"));
+        tuim::EndContainer();
+    }
+    tuim::Print("\n");
 
-    tuim::Print("\n\t");
-    if (tuim::HomeMenuButton("#button-registry", "Registry"));
-    
-    tuim::Print("\n\t");
-    if (tuim::HomeMenuButton("#button-ledger", "Ledger"));
-
-    tuim::Print("\n\n\t");
-    if (tuim::HomeMenuButton("#button-back", "Back"))
+    tuim::Print("\n");
+    if (tuim::HomeMenuButton("#button-back", "&bBack&r"))
         m_State->PopMenu();
         
     tuim::EndContainer();

@@ -57,6 +57,13 @@ std::unordered_map<Vec2<int>, UniquePtr<Building>>& World::GetBuildings() {
     return m_Buildings;
 }
 
+Building* World::GetBuilding(Vec2<int> position) {
+    auto it = m_Buildings.find(position);
+    if (it == m_Buildings.end())
+        return nullptr;
+    return it->second.get();
+}
+
 Image* World::GetStatesImage() {
     return m_StatesImage.get();
 }
@@ -134,6 +141,14 @@ void World::AddBuildingType(UniquePtr<BuildingType> buildingType) {
 
 void World::AddBuilding(UniquePtr<Building> building) {
     m_Buildings[building->GetPosition()] = std::move(building);
+}
+
+void World::RemoveBuilding(Building* building) {
+    m_Buildings.erase(building->GetPosition());
+}
+
+void World::RemoveBuilding(Vec2<int> position) {
+    m_Buildings.erase(position);
 }
 
 void World::SetStatesImage(UniquePtr<Image> statesImage) {
