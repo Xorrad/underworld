@@ -1,21 +1,20 @@
 #pragma once
 
-#include <string>
-
 class ItemStack {
 public:
-    ItemStack(const std::string& itemId, int quality, double quantity);
+    ItemStack(Item* type, int quality, double quantity);
 
-    const std::string& GetItemId() const;
+    Item* GetType() const;
     int GetQuality() const;
     double GetQuantity() const;
+    int GetVolume() const;
 
-    void SetItemId(const std::string& itemId);
+    void SetType(Item* type);
     void SetQuality(int quality);
     void SetQuantity(double quantity);
     
 private:
-    std::string m_ItemId;
+    Item* m_Type;
     int m_Quality;
     double m_Quantity;
 };

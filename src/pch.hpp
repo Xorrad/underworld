@@ -5,7 +5,7 @@
 #include <stack> // std::stack
 #include <cmath> // std::fmod, std::round...
 #include <charconv> // std::from_chars
-#include <unordered_map> // std::unordered_map
+#include <unordered_map> // std::unordered_map, std::unordered_multimap
 #include <set> // std::set
 #include <sstream> // std::getline
 #include <thread> // std::thread, std::this_thread
@@ -34,6 +34,7 @@ class State;
 class City;
 class Item;
 class ItemStack;
+class Stockpile;
 class ProductionChain;
 class BuildingType;
 class Building;

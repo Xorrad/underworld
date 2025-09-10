@@ -1,13 +1,14 @@
 #include "ItemStack.hpp"
+#include "Item.hpp"
 
-ItemStack::ItemStack(const std::string& itemId, int quality, double quantity) :
-    m_ItemId(itemId),
+ItemStack::ItemStack(Item* type, int quality, double quantity) :
+    m_Type(type),
     m_Quality(quality),
     m_Quantity(quantity)
 {}
 
-const std::string& ItemStack::GetItemId() const {
-    return m_ItemId;
+Item* ItemStack::GetType() const {
+    return m_Type;
 }
 
 int ItemStack::GetQuality() const {
@@ -18,8 +19,12 @@ double ItemStack::GetQuantity() const {
     return m_Quantity;
 }
 
-void ItemStack::SetItemId(const std::string& itemId) {
-    m_ItemId = itemId;
+int ItemStack::GetVolume() const {
+    return m_Quantity * m_Type->GetVolume();
+}
+
+void ItemStack::SetType(Item* type) {
+    m_Type = type;
 }
 
 void ItemStack::SetQuality(int quality) {
