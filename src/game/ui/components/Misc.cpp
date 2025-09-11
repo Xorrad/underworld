@@ -40,7 +40,8 @@ void tuim::Minimap(const std::string& id, vec2 size, World* world) {
     // in the terminal.
     size.x /= 2;
 
-    ::Image* statesImage = world->GetStatesImage();
+    ::Image* statesImage = world->GetTerrainImage();
+    // ::Image* statesImage = world->GetStatesImage();
     vec2 originalSize = vec2(statesImage->GetWidth(), statesImage->GetHeight());
     auto& pixels = statesImage->GetPixels();
 

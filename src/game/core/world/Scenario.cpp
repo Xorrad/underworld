@@ -120,6 +120,7 @@ void Scenario::LoadBuildingTypes(World* world) {
             buildingData["icon"],
             buildingData["price"],
             buildingData["employees"],
+            buildingData["stockpile"],
             BuildingTypes::PRODUCTION,
             std::move(productionChain)
         );

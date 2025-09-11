@@ -215,6 +215,22 @@ void UI::MapMenu::Render() {
     }
     
     if (tuim::HomeMenuButton("#button-show-stockpile", "&bStockpile&r")) showStockpile = !showStockpile;
+    if (tileBuilding != nullptr && showStockpile) {
+        tuim::Print("\n\n");
+
+        tuim::SetCurrentCursor({2, tuim::GetCurrentCursor().y});
+        tuim::BeginContainer("#container-sidebar-stockpile", "", {sidebarWidth-3, 10}, tuim::CONTAINER_FLAGS_BORDERLESS);
+
+        Stockpile* stockpile = tileBuilding->GetStockpile();
+
+        tuim::Print("\nVolume: {:.1f}/{:.1f} m^3\n", (stockpile->GetMaxVolume() - stockpile->GetVolume())/1000.f, stockpile->GetMaxVolume()/1000.f);
+
+        for (auto& [id, item] : stockpile->GetItems()) {
+            tuim::Print("\t{}x {}&r\n", item->GetQuantity(), item->GetType()->GetName());
+        }
+
+        tuim::EndContainer();
+    }
     tuim::Print("\n");
     
     if (tuim::HomeMenuButton("#button-show-actions", "&bActions&r")) showActions = !showActions;

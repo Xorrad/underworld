@@ -38,6 +38,9 @@ class Stockpile;
 class ProductionChain;
 class BuildingType;
 class Building;
+class IFaction;
+class Cartel;
+class Military;
 
 namespace UI {
     class IMenu;

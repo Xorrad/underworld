@@ -64,6 +64,24 @@ Building* World::GetBuilding(Vec2<int> position) {
     return it->second.get();
 }
 
+std::unordered_map<std::string, UniquePtr<IFaction>>& World::GetFactions() {
+    return m_Factions;
+}
+
+Cartel* World::GetCartel(const std::string& id) {
+    auto it = m_Factions.find(id);
+    if (it == m_Factions.end())
+        return nullptr;
+    return dynamic_cast<Cartel*>(it->second.get());
+}
+
+Military* World::GetMilitary(const std::string& id) {
+    auto it = m_Factions.find(id);
+    if (it == m_Factions.end())
+        return nullptr;
+    return dynamic_cast<Military*>(it->second.get());
+}
+
 Image* World::GetStatesImage() {
     return m_StatesImage.get();
 }
@@ -177,4 +195,8 @@ void World::SetDate(Date date) {
 
 void World::Update(InGameState* state) {
     m_Date = m_Date + 1;
+
+    for (auto& [pos, building] : m_Buildings) {
+        building->GetStockpile()->AddItem(MakeUnique<ItemStack>(m_Items.begin()->second.get(), 0, 1));
+    }
 }

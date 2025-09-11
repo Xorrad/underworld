@@ -18,6 +18,9 @@ public:
     std::unordered_map<std::string, UniquePtr<BuildingType>>& GetBuildingTypes();
     std::unordered_map<Vec2<int>, UniquePtr<Building>>& GetBuildings();
     Building* GetBuilding(Vec2<int> position);
+    std::unordered_map<std::string, UniquePtr<IFaction>>& GetFactions();
+    Cartel* GetCartel(const std::string& id);
+    Military* GetMilitary(const std::string& id);
     
     Image* GetStatesImage();
     Image* GetTerrainImage();
@@ -71,6 +74,7 @@ private:
     std::unordered_map<std::string, UniquePtr<BuildingType>> m_BuildingTypes;
     
     std::unordered_map<Vec2<int>, UniquePtr<Building>> m_Buildings;
+    std::unordered_map<std::string, UniquePtr<IFaction>> m_Factions;
 
     UniquePtr<Image> m_StatesImage;
     UniquePtr<Image> m_TerrainImage;

@@ -1,12 +1,13 @@
 #include "BuildingType.hpp"
 #include "ProductionChain.hpp"
 
-BuildingType::BuildingType(const std::string& id, const std::string& name, const std::string& icon, int price, int employees, BuildingTypes type, UniquePtr<ProductionChain> productionChain) :
+BuildingType::BuildingType(const std::string& id, const std::string& name, const std::string& icon, int price, int employees, int maxVolume, BuildingTypes type, UniquePtr<ProductionChain> productionChain) :
     m_Id(id),
     m_Name(name),
     m_Icon(icon),
     m_Price(price),
     m_Employees(employees),
+    m_MaxVolume(maxVolume),
     m_Type(type),
     m_ProductionChain(std::move(productionChain))
 {}
@@ -17,6 +18,7 @@ BuildingType::BuildingType(const BuildingType& other) :
     m_Icon(other.m_Icon),
     m_Price(other.m_Price),
     m_Employees(other.m_Employees),
+    m_MaxVolume(other.m_MaxVolume),
     m_Type(other.m_Type),
     m_ProductionChain(other.m_ProductionChain ? MakeUnique<ProductionChain>(*other.m_ProductionChain) : nullptr)
 {}
@@ -28,6 +30,7 @@ BuildingType& BuildingType::operator=(const BuildingType& other) {
         m_Icon = other.m_Icon;
         m_Price = other.m_Price;
         m_Employees = other.m_Employees;
+        m_MaxVolume = other.m_MaxVolume;
         m_Type = other.m_Type;
         m_ProductionChain = other.m_ProductionChain ? MakeUnique<ProductionChain>(*other.m_ProductionChain) : nullptr;
     }
@@ -58,6 +61,10 @@ int BuildingType::GetEmployees() const {
     return m_Employees;
 }
 
+int BuildingType::GetMaxVolume() const {
+    return m_MaxVolume;
+}
+
 ProductionChain* BuildingType::GetProductionChain() {
     return m_ProductionChain.get();
 }
@@ -84,6 +91,10 @@ void BuildingType::SetType(BuildingTypes type) {
 
 void BuildingType::SetEmployees(int employees) {
     m_Employees = employees;
+}
+
+void BuildingType::SetMaxVolume(int maxVolume) {
+    m_MaxVolume = maxVolume;
 }
 
 void BuildingType::SetProductionChain(UniquePtr<ProductionChain> productionChain) {

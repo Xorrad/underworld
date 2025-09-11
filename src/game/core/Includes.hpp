@@ -9,3 +9,6 @@
 #include "game/core/buildings/BuildingType.hpp"
 #include "game/core/buildings/ProductionChain.hpp"
 #include "game/core/buildings/Building.hpp"
+#include "game/core/factions/IFaction.hpp"
+#include "game/core/factions/Cartel.hpp"
+#include "game/core/factions/Military.hpp"
