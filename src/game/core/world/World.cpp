@@ -196,7 +196,39 @@ void World::SetDate(Date date) {
 void World::Update(InGameState* state) {
     m_Date = m_Date + 1;
 
+    // for (auto& [pos, building] : m_Buildings) {
+    //     building->GetStockpile()->AddItem(MakeUnique<ItemStack>(m_Items.begin()->second.get(), 0, 1));
+    // }
+
+    this->UpdateBuildings(state);
+}
+
+void World::UpdateBuildings(InGameState* state) {
     for (auto& [pos, building] : m_Buildings) {
-        building->GetStockpile()->AddItem(MakeUnique<ItemStack>(m_Items.begin()->second.get(), 0, 1));
+        Stockpile* stockpile = building->GetStockpile();
+        ProductionChain* productionChain = building->GetType()->GetProductionChain();
+
+        // Check if the production is finished.
+        if (building->GetProductionStartDate() != Date::EPOCH) {
+            Date productionEndDate = building->GetProductionEndDate();
+
+            if (m_Date >= productionEndDate) {
+                building->SetProductionStartDate(Date::EPOCH);
+                for (auto& [itemType, quantity] : productionChain->GetOutputs())
+                    stockpile->AddItem(MakeUnique<ItemStack>(itemType, 0, quantity));
+            }
+        }
+
+        // Check if the production is ready to start.
+        if (building->GetProductionStartDate() == Date::EPOCH) {
+            bool hasInputs = productionChain->HasInputs(stockpile);
+
+            if (hasInputs) {
+                for (auto& [itemType, quantity] : productionChain->GetInputs())
+                    stockpile->RemoveItem(MakeUnique<ItemStack>(itemType, 0, quantity));
+                building->SetProductionStartDate(m_Date);
+            }
+
+        }
     }
 }

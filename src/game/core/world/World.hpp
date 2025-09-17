@@ -60,6 +60,7 @@ public:
     void SetDate(Date date);
 
     void Update(InGameState* state);
+    void UpdateBuildings(InGameState* state);
 
 private:
     std::mutex m_Mutex;

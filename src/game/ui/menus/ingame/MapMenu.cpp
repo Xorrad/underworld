@@ -197,7 +197,8 @@ void UI::MapMenu::Render() {
 
             ProductionChain* productionChain = tileBuilding->GetType()->GetProductionChain();
             for (auto& [input, quantity] : productionChain->GetInputs()) {
-                tuim::Print("#aa0000{}x {}&r\n", quantity, input->GetName());
+                    std::string color = (tileBuilding->GetStockpile()->Contains(input, quantity)) ? "#aaaaaa" : "#aa0000";
+                tuim::Print("{}{}x {}&r\n", color, quantity, input->GetName());
             }
             if (productionChain->GetInputs().empty()) tuim::Print("Nothing\n");
             tuim::Print("\t⇓\n");
@@ -206,7 +207,7 @@ void UI::MapMenu::Render() {
             }
             if (productionChain->GetOutputs().empty()) tuim::Print("Nothing\n");
 
-            int remainingDays = ((productionChain->GetStart() + productionChain->GetDuration()) - world->GetDate());
+            int remainingDays = ((tileBuilding->GetProductionStartDate() + productionChain->GetDuration()) - world->GetDate());
             tuim::Print("\nTime Left: {} days\n", (remainingDays < 0 ? "N/A" : std::to_string(remainingDays)));
 
             tuim::EndContainer();

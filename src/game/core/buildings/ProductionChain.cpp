@@ -1,17 +1,16 @@
 #include "ProductionChain.hpp"
 #include "game/core/world/World.hpp"
 #include "game/core/items/Item.hpp"
+#include "game/core/items/Stockpile.hpp"
 
-ProductionChain::ProductionChain(int duration, const Date& start, const std::unordered_map<Item*, int>& inputs, const std::unordered_map<Item*, int>& outputs) :
+ProductionChain::ProductionChain(int duration, const std::unordered_map<Item*, int>& inputs, const std::unordered_map<Item*, int>& outputs) :
     m_Duration(duration),
-    m_Start(start),
     m_Inputs(inputs),
     m_Outputs(outputs)
 {}
 
 ProductionChain::ProductionChain(const ProductionChain& other) :
     m_Duration(other.m_Duration),
-    m_Start(other.m_Start),
     m_Inputs(other.m_Inputs),
     m_Outputs(other.m_Outputs)
 {}
@@ -19,7 +18,6 @@ ProductionChain::ProductionChain(const ProductionChain& other) :
 ProductionChain& ProductionChain::operator=(const ProductionChain& other) {
     if (this != &other) {
         m_Duration = other.m_Duration;
-        m_Start = other.m_Start;
         m_Inputs = other.m_Inputs;
         m_Outputs = other.m_Outputs;
     }
@@ -30,10 +28,6 @@ int ProductionChain::GetDuration() const {
     return m_Duration;
 }
 
-const Date& ProductionChain::GetStart() const {
-    return m_Start;
-}
-
 const std::unordered_map<Item*, int>& ProductionChain::GetInputs() const {
     return m_Inputs;
 }
@@ -42,12 +36,19 @@ const std::unordered_map<Item*, int>& ProductionChain::GetOutputs() const {
     return m_Outputs;
 }
 
-void ProductionChain::SetDuration(int duration) {
-    m_Duration = duration;
+bool ProductionChain::HasInputs(Stockpile* stockpile) {
+    return m_Inputs.empty() || std::all_of(
+        m_Inputs.begin(),
+        m_Inputs.end(),
+        [&](auto const& input) {
+            auto const& [itemType, quantity] = input;
+            return stockpile->Contains(itemType, quantity);
+        }
+    );
 }
 
-void ProductionChain::SetStart(const Date& start) {
-    m_Start = start;
+void ProductionChain::SetDuration(int duration) {
+    m_Duration = duration;
 }
 
 void ProductionChain::SetInputs(const std::unordered_map<Item*, int>& inputs) {
@@ -88,5 +89,5 @@ UniquePtr<ProductionChain> ProductionChain::FromJson(World* world, const nlohman
         outputs[world->GetItems()[itemId].get()] = amount;
     }
 
-    return MakeUnique<ProductionChain>(duration, Date::EPOCH, inputs, outputs);
+    return MakeUnique<ProductionChain>(duration, inputs, outputs);
 }
