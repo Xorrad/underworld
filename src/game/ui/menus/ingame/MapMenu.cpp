@@ -229,7 +229,7 @@ void UI::MapMenu::Render() {
 
         Stockpile* stockpile = tileBuilding->GetStockpile();
 
-        tuim::Print("\nVolume: {:.1f}/{:.1f} m^3\n", (stockpile->GetMaxVolume() - stockpile->GetVolume())/1000.f, stockpile->GetMaxVolume()/1000.f);
+        tuim::Print("Volume: {:.1f}/{:.1f} m^3\n", (stockpile->GetVolume())/1000.f, stockpile->GetMaxVolume()/1000.f);
 
         for (auto& [id, item] : stockpile->GetItems()) {
             tuim::Print("\t{}x {}&r\n", item->GetQuantity(), item->GetType()->GetName());
