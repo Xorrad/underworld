@@ -30,6 +30,7 @@ class Date;
 
 class Scenario;
 class World;
+class WorldSettings;
 class Country;
 class State;
 class City;
@@ -57,6 +58,7 @@ namespace UI {
 #include "util/Color.hpp"
 #include "util/Image.hpp"
 #include "util/Date.hpp"
+#include "util/String.hpp"
 #include "game/core/Configuration.hpp"
 #include "game/ui/Defines.hpp"
 #include "game/core/buildings/BuildingTypes.hpp"

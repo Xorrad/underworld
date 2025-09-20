@@ -3,6 +3,7 @@
 
 #include "tests/DevTests.hpp"
 #include "tests/DateTests.hpp"
+#include "tests/StringTests.hpp"
 #include "tests/ItemTests.hpp"
 
 int main(int argc, char** argv) {
