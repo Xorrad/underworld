@@ -13,6 +13,7 @@ public:
     // Conversion
     static Date FromHours(long hours);
     static Date FromString(const std::string& str);
+    static std::string DurationFormat(long hours);
     long DaysSinceEpoch() const;
     long ToHours() const;
     std::string ToString() const;

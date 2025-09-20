@@ -207,8 +207,13 @@ void UI::MapMenu::Render() {
             }
             if (productionChain->GetOutputs().empty()) tuim::Print("Nothing\n");
 
-            int remainingDays = ((tileBuilding->GetProductionStartDate() + productionChain->GetDuration()) - world->GetDate());
-            tuim::Print("\nTime Left: {} days\n", (remainingDays < 0 ? "N/A" : std::to_string(remainingDays)));
+            if (tileBuilding->GetProductionStartDate() == Date::EPOCH) {
+                tuim::Print("\nMissing input products.\n");
+            }
+            else {
+                long remainingHours = (tileBuilding->GetProductionEndDate() - world->GetDate());
+                tuim::Print("\nTime Left: {}\n", Date::DurationFormat(remainingHours));
+            }
 
             tuim::EndContainer();
         }

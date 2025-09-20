@@ -121,6 +121,15 @@ Date Date::FromString(const std::string& str) {
     }
 }
 
+std::string Date::DurationFormat(long hours) {
+    if (hours < 0) return "N/A";
+    if (hours == 1) return "1 hour";
+    if (hours < 24) return std::to_string(hours) + " hours";
+    if (hours == 24) return "1 day";
+    if (hours < 24*30*3) return std::to_string(hours/24) + " days";
+    return std::to_string(hours/720) + " months";
+}
+
 long Date::DaysSinceEpoch() const {
     long long days = 0;
     if (year >= Date::EPOCH.year) {
